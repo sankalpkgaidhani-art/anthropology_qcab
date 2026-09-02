@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropology QCAB Generator</title>
+
+    <style>
+        :root {
+            --navy: #17263c;
+            --navy-dark: #101c2d;
+            --slate: #e8eef3;
+            --slate-border: #b8c5d0;
+            --slate-focus: #71859a;
+            --background: #f6f3eb;
+            --white: #ffffff;
+            --text: #252525;
+            --muted: #666666;
+            --border: #ddd8ca;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--navy);
+        }
+
+        .box {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+            border: 1px solid var(--border);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            margin-top: 7px;
+            font-size: 16px;
+            background: var(--slate);
+            color: var(--text);
+            border: 1px solid var(--slate-border);
+            border-radius: 7px;
+            box-sizing: border-box;
+            outline: none;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        select:hover {
+            background: #e2e9ef;
+            border-color: var(--slate-focus);
+        }
+
+        select:focus {
+            background: var(--white);
+            border-color: var(--slate-focus);
+            box-shadow: 0 0 0 3px rgba(113, 133, 154, 0.15);
+        }
+
+        .question {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .question label {
+            display: inline;
+            font-weight: normal;
+            color: var(--text);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid var(--navy);
+            border-radius: 6px;
+            background: var(--navy);
+            color: white;
+        }
+
+        button:hover {
+            background: var(--navy-dark);
+        }
+
+        #downloadPDF {
+            display: none;
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: 0;
+            margin-top: 10px;
+            border-bottom: 2px solid var(--navy);
+        }
+
+        .mode-buttons button {
+            margin-top: 0;
+            flex: 1;
+            border-radius: 6px 6px 0 0;
+            border: 1px solid var(--border);
+            background: #eeeae0;
+            color: var(--navy);
+            font-weight: bold;
+        }
+
+        .mode-buttons button:hover {
+            background: #e4dfd2;
+        }
+
+        .mode-buttons button.active {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+            font-weight: bold;
+        }
+
+        #questionControls {
+            margin-bottom: 15px;
+        }
+
+        #questionControls button {
+            margin-top: 0;
+            margin-right: 8px;
+            background: white;
+            color: var(--navy);
+            border: 1px solid var(--navy);
+        }
+
+        #questionControls button:hover {
+            background: #eef1f4;
+        }
+
+        #selectedCount {
+            margin-left: 10px;
+            color: var(--navy);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Anthropology QCAB Generator</h1>
+
+    <!-- SELECTION -->
+
+    <div class="box">
+
+        <label>Selection Mode</label>
+
+        <div class="mode-buttons">
+
+            <button id="topicMode" class="active" type="button">
+                Topic-wise
+            </button>
+
+            <button id="yearMode" type="button">
+                Year-wise
+            </button>
+
+        </div>
+
+        <label for="paper">Select Paper</label>
+
+        <select id="paper">
+            <option value="">Select Paper</option>
+            <option value="Paper I">Paper I</option>
+            <option value="Paper II">Paper II</option>
+        </select>
+
+        <!-- TOPIC -->
+
+        <div id="topicSection">
+
+            <label for="topic">
+                Select Topic
+            </label>
+
+            <select id="topic">
+                <option value="">Select Topic</option>
+            </select>
+
+        </div>
+
+        <!-- YEAR -->
+
+        <div id="yearSection" style="display:none;">
+
+            <label for="year">
+                Select Year
+            </label>
+
+            <select id="year">
+                <option value="">Select Year</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUESTIONS -->
+
+    <div class="box">
+
+        <h2>
+            Questions
+            <span id="questionCount"></span>
+        </h2>
+
+        <div id="questionControls" style="display:none;">
+
+            <button id="selectAll" type="button">
+                Select All
+            </button>
+
+            <button id="clearAll" type="button">
+                Clear All
+            </button>
+
+            <strong id="selectedCount">
+                Selected: 0
+            </strong>
+
+        </div>
+
+        <div id="questions">
+            Select a paper and topic to see questions.
+        </div>
+
+        <button id="generateQCAB" type="button">
+            Generate QCAB PDF
+        </button>
+
+        <button id="downloadPDF" type="button">
+            Download QCAB PDF
+        </button>
+
+    </div>
+
+
+    <!-- jsPDF -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- html2canvas -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    <script>
+
+        let allQuestions = [];
+        let selectionMode = "topic";
+
+
+        // ==========================================
+        // LOAD QUESTIONS
+        // ==========================================
+
+        fetch("questions.json")
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Could not load questions.json");
+                }
+
+                return response.json();
+
+            })
+
+            .then(data => {
+
+                allQuestions = data.questions_repository;
+
+                console.log(
+                    "Questions loaded:",
+                    allQuestions
+                );
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Error loading questions:",
+                    error
+                );
+
+                document.getElementById("questions").innerHTML =
+                    "Error loading questions.json";
+
+            });
+
+
+        // ==========================================
+        // MODE BUTTONS
+        // ==========================================
+
+        document
+            .getElementById("topicMode")
+            .addEventListener(
+                "click",
+                function () {
+
+                    selectionMode = "topic";
+
+                    document
+                        .getElementById("topicMode")
+                        .classList.add("active");
+
+                    document
+                        .getElementById("yearMode")
+                        .classList.remove("active");
+
+                    document
+                        .getElementById("topicSection")
+                        .style.display = "block";
+
+                    document
+                        .getElementById("yearSection")
+                        .style.display = "none";
+
+                    resetQuestions();
+
+                    loadTopics();
+
+                }
+            );
+
+
+        document
+            .getElementById("yearMode")
+            .addEventListener(
+                "click",
+                function () {
+
+                    selectionMode = "year";
+
+                    document
+                        .getElementById("yearMode")
+                        .classList.add("active");
+
+                    document
+                        .getElementById("topicMode")
+                        .classList.remove("active");
+
+                    document
+                        .getElementById("topicSection")
+                        .style.display = "none";
+
+                    document
+                        .getElementById("yearSection")
+                        .style.display = "block";
+
+                    resetQuestions();
+
+                    loadYears();
+
+                }
+            );
+
+
+        // ==========================================
+        // PAPER CHANGES
+        // ==========================================
+
+        document
+            .getElementById("paper")
+            .addEventListener(
+                "change",
+                function () {
+
+                    resetQuestions();
+
+                    if (selectionMode === "topic") {
+
+                        loadTopics();
+
+                    } else {
+
+                        loadYears();
+
+                    }
+
+                }
+            );
+
+
+        // ==========================================
+        // LOAD TOPICS
+        // ==========================================
+
+        function loadTopics() {
+
+            const selectedPaper =
+                document
+                    .getElementById("paper")
+                    .value;
+
+            const topicSelect =
+                document
+                    .getElementById("topic");
+
+            topicSelect.innerHTML =
+                '<option value="">Select Topic</option>';
+
+            if (!selectedPaper) {
+                return;
+            }
+
+            const topics = [
+                ...new Set(
+
+                    allQuestions
+
+                        .filter(question =>
+                            question.paper === selectedPaper
+                        )
+
+                        .map(question =>
+                            question.topic
+                        )
+
+                        .filter(topic => topic)
+
+                )
+            ];
+
+            topics.forEach(topic => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = topic;
+                option.textContent = topic;
+
+                topicSelect.appendChild(option);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // LOAD YEARS
+        // ==========================================
+
+        function loadYears() {
+
+            const selectedPaper =
+                document
+                    .getElementById("paper")
+                    .value;
+
+            const yearSelect =
+                document
+                    .getElementById("year");
+
+            yearSelect.innerHTML =
+                '<option value="">Select Year</option>';
+
+            if (!selectedPaper) {
+                return;
+            }
+
+            const years = [
+
+                ...new Set(
+
+                    allQuestions
+
+                        .filter(question =>
+                            question.paper === selectedPaper
+                        )
+
+                        .filter(question =>
+                            Number(question.year) >= 2016
+                        )
+
+                        .map(question =>
+                            Number(question.year)
+                        )
+
+                        .filter(year =>
+                            !isNaN(year)
+                        )
+
+                )
+
+            ];
+
+            years.sort(
+                (a, b) => b - a
+            );
+
+            years.forEach(year => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = year;
+                option.textContent = year;
+
+                yearSelect.appendChild(option);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // TOPIC CHANGES
+        // ==========================================
+
+        document
+            .getElementById("topic")
+            .addEventListener(
+                "change",
+                showQuestions
+            );
+
+
+        // ==========================================
+        // YEAR CHANGES
+        // ==========================================
+
+        document
+            .getElementById("year")
+            .addEventListener(
+                "change",
+                showQuestions
+            );
+
+
+        // ==========================================
+        // SHOW QUESTIONS
+        // ==========================================
+
+        function showQuestions() {
+
+            const selectedPaper =
+                document
+                    .getElementById("paper")
+                    .value;
+
+            const questionContainer =
+                document
+                    .getElementById("questions");
+
+            if (!selectedPaper) {
+
+                questionContainer.innerHTML =
+                    "Select a paper to see questions.";
+
+                return;
+
+            }
+
+            let matchingQuestions = [];
+
+
+            // ======================================
+            // TOPIC-WISE
+            // ======================================
+
+            if (selectionMode === "topic") {
+
+                const selectedTopic =
+                    document
+                        .getElementById("topic")
+                        .value;
+
+                if (!selectedTopic) {
+
+                    questionContainer.innerHTML =
+                        "Select a paper and topic to see questions.";
+
+                    return;
+
+                }
+
+                matchingQuestions =
+                    allQuestions.filter(question =>
+
+                        question.paper === selectedPaper &&
+
+                        question.topic === selectedTopic
+
+                    );
+
+            }
+
+
+            // ======================================
+            // YEAR-WISE
+            // ======================================
+
+            else {
+
+                const selectedYear =
+                    document
+                        .getElementById("year")
+                        .value;
+
+                if (!selectedYear) {
+
+                    questionContainer.innerHTML =
+                        "Select a paper and year to see questions.";
+
+                    return;
+
+                }
+
+                matchingQuestions =
+                    allQuestions.filter(question =>
+
+                        question.paper === selectedPaper &&
+
+                        Number(question.year) ===
+                        Number(selectedYear) &&
+
+                        Number(question.year) >= 2016
+
+                    );
+
+            }
+
+
+            // ======================================
+            // SORT
+            // ======================================
+
+            matchingQuestions.sort(
+                (a, b) =>
+                    Number(b.year) - Number(a.year)
+            );
+
+
+            // ======================================
+            // NO QUESTIONS
+            // ======================================
+
+            if (matchingQuestions.length === 0) {
+
+                questionContainer.innerHTML =
+                    "No questions found.";
+
+                document
+                    .getElementById("questionControls")
+                    .style.display = "none";
+
+                document
+                    .getElementById("questionCount")
+                    .textContent = "";
+
+                return;
+
+            }
+
+
+            // ======================================
+            // CLEAR OLD QUESTIONS
+            // ======================================
+
+            questionContainer.innerHTML = "";
+
+
+            // ======================================
+            // SHOW CONTROLS
+            // ======================================
+
+            document
+                .getElementById("questionControls")
+                .style.display = "block";
+
+            document
+                .getElementById("questionCount")
+                .textContent =
+                " (" + matchingQuestions.length + ")";
+
+            document
+                .getElementById("selectedCount")
+                .textContent =
+                "Selected: 0";
+
+
+            // ======================================
+            // DISPLAY QUESTIONS
+            // ======================================
+
+            matchingQuestions.forEach(question => {
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "question";
+
+                div.innerHTML = `
+
+                    <input
+                        type="checkbox"
+                        value="${question.question_id || question.id}"
+                    >
+
+                    <label>
+
+                        <strong>
+                            ${question.year || ""}
+                        </strong>
+
+                        <br>
+
+                        ${question.question_text}
+
+                        <br>
+
+                        <small>
+
+                            ${
+                                question.marks != null
+                                ? question.marks + " Marks"
+                                : "Marks not specified"
+                            }
+
+                            ${
+                                question.word_limit
+                                ? " | " +
+                                  question.word_limit +
+                                  " Words"
+                                : ""
+                            }
+
+                        </small>
+
+                    </label>
+
+                `;
+
+                questionContainer.appendChild(div);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // RESET QUESTIONS
+        // ==========================================
+
+        function resetQuestions() {
+
+            document
+                .getElementById("questions")
+                .innerHTML =
+                "Select a paper and topic to see questions.";
+
+            document
+                .getElementById("questionControls")
+                .style.display = "none";
+
+            document
+                .getElementById("questionCount")
+                .textContent = "";
+
+            document
+                .getElementById("selectedCount")
+                .textContent =
+                "Selected: 0";
+
+        }
+
+
+        // ==========================================
+        // SELECT ALL
+        // ==========================================
+
+        document
+            .getElementById("selectAll")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const checkboxes =
+                        document.querySelectorAll(
+                            '#questions input[type="checkbox"]'
+                        );
+
+                    checkboxes.forEach(checkbox => {
+
+                        checkbox.checked = true;
+
+                    });
+
+                    updateSelectedCount();
+
+                }
+            );
+
+
+        // ==========================================
+        // CLEAR ALL
+        // ==========================================
+
+        document
+            .getElementById("clearAll")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const checkboxes =
+                        document.querySelectorAll(
+                            '#questions input[type="checkbox"]'
+                        );
+
+                    checkboxes.forEach(checkbox => {
+
+                        checkbox.checked = false;
+
+                    });
+
+                    updateSelectedCount();
+
+                }
+            );
+
+
+        // ==========================================
+        // UPDATE SELECTED COUNT
+        // ==========================================
+
+        function updateSelectedCount() {
+
+            const checkedBoxes =
+                document.querySelectorAll(
+                    '#questions input[type="checkbox"]:checked'
+                );
+
+            document
+                .getElementById("selectedCount")
+                .textContent =
+                "Selected: " + checkedBoxes.length;
+
+        }
+
+
+        // ==========================================
+        // CHECKBOX CHANGE
+        // ==========================================
+
+        document
+            .getElementById("questions")
+            .addEventListener(
+                "change",
+                function (event) {
+
+                    if (
+                        event.target.type === "checkbox"
+                    ) {
+
+                        updateSelectedCount();
+
+                    }
+
+                }
+            );
+
+
+        // ==========================================
+        // SELECTED QUESTIONS
+        // ==========================================
+
+        window.getSelectedQuestions = function () {
+
+            const checkedBoxes =
+                document.querySelectorAll(
+                    '#questions input[type="checkbox"]:checked'
+                );
+
+            const selectedIds =
+                Array.from(checkedBoxes).map(
+                    checkbox =>
+                        checkbox.value
+                );
+
+            const selectedQuestions =
+                allQuestions.filter(question =>
+
+                    selectedIds.includes(
+                        question.question_id || question.id
+                    )
+
+                );
+
+            return selectedQuestions;
+
+        };
+
+    </script>
+
+
+    <!-- ORIGINAL QCAB PDF GENERATOR -->
+
+    <script src="js/generatePDF.js"></script>
+
+</body>
+</html>
