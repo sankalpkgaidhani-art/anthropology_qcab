@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Anthropology QCAB Generator</title>
 
     <style>
+
         :root {
             --navy: #17263c;
             --navy-dark: #101c2d;
@@ -102,6 +106,11 @@
             background: var(--navy-dark);
         }
 
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         #downloadPDF {
             display: none;
         }
@@ -154,163 +163,947 @@
             margin-left: 10px;
             color: var(--navy);
         }
+
+        #loadingMessage {
+            color: var(--muted);
+            padding: 15px 0;
+        }
+
+
+        /* ================================
+           LOGIN SCREEN
+           ================================ */
+
+        #loginScreen {
+            max-width: 420px;
+            margin: 80px auto;
+            padding: 30px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #loginScreen h2 {
+            color: var(--navy);
+            margin-top: 0;
+        }
+
+        #loginScreen input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            margin-top: 12px;
+            font-size: 16px;
+            border: 1px solid var(--slate-border);
+            border-radius: 7px;
+            background: var(--slate);
+            outline: none;
+        }
+
+        #loginScreen input:focus {
+            background: var(--white);
+            border-color: var(--slate-focus);
+            box-shadow: 0 0 0 3px rgba(113, 133, 154, 0.15);
+        }
+
+        #loginButton {
+            width: 100%;
+        }
+
+        #loginMessage {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+
+        /* ================================
+           LOGOUT BUTTON
+           ================================ */
+
+        #logoutContainer {
+            display: none;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        #logoutButton {
+            margin-top: 0;
+            background: white;
+            color: var(--navy);
+            border: 1px solid var(--navy);
+        }
+
+        #logoutButton:hover {
+            background: #eef1f4;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <h1>Anthropology QCAB Generator</h1>
 
-    <!-- SELECTION -->
+    <!-- ==========================================
+         LOGIN SCREEN
+         ========================================== -->
 
-    <div class="box">
+    <div id="loginScreen">
 
-        <label>Selection Mode</label>
+        <h2>Anthropology QCAB</h2>
 
-        <div class="mode-buttons">
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Email"
+        >
 
-            <button id="topicMode" class="active" type="button">
-                Topic-wise
-            </button>
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+        >
 
-            <button id="yearMode" type="button">
-                Year-wise
+        <button id="loginButton" type="button">
+            Login
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+
+    <!-- ==========================================
+         MAIN WEBSITE
+         Hidden until user is authenticated
+         ========================================== -->
+
+    <div id="mainContent" style="display: none;">
+
+        <div id="logoutContainer">
+
+            <button id="logoutButton" type="button">
+                Logout
             </button>
 
         </div>
 
-        <label for="paper">Select Paper</label>
 
-        <select id="paper">
-            <option value="">Select Paper</option>
-            <option value="Paper I">Paper I</option>
-            <option value="Paper II">Paper II</option>
-        </select>
+        <h1>Anthropology QCAB Generator</h1>
 
-        <!-- TOPIC -->
 
-        <div id="topicSection">
+        <!-- ==========================================
+             SELECTION
+             ========================================== -->
 
-            <label for="topic">
-                Select Topic
+        <div class="box">
+
+            <label>Selection Mode</label>
+
+            <div class="mode-buttons">
+
+                <button
+                    id="topicMode"
+                    class="active"
+                    type="button"
+                >
+                    Topic-wise
+                </button>
+
+                <button
+                    id="yearMode"
+                    type="button"
+                >
+                    Year-wise
+                </button>
+
+            </div>
+
+
+            <label for="paper">
+                Select Paper
             </label>
 
-            <select id="topic">
-                <option value="">Select Topic</option>
+            <select id="paper">
+
+                <option value="">
+                    Select Paper
+                </option>
+
+                <option value="Paper I">
+                    Paper I
+                </option>
+
+                <option value="Paper II">
+                    Paper II
+                </option>
+
             </select>
+
+
+            <!-- TOPIC -->
+
+            <div id="topicSection">
+
+                <label for="topic">
+                    Select Topic
+                </label>
+
+                <select id="topic">
+
+                    <option value="">
+                        Select Topic
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- YEAR -->
+
+            <div
+                id="yearSection"
+                style="display: none;"
+            >
+
+                <label for="year">
+                    Select Year
+                </label>
+
+                <select id="year">
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                </select>
+
+            </div>
 
         </div>
 
-        <!-- YEAR -->
 
-        <div id="yearSection" style="display:none;">
+        <!-- ==========================================
+             QUESTIONS
+             ========================================== -->
 
-            <label for="year">
-                Select Year
-            </label>
+        <div class="box">
 
-            <select id="year">
-                <option value="">Select Year</option>
-            </select>
+            <h2>
+
+                Questions
+
+                <span id="questionCount"></span>
+
+            </h2>
+
+
+            <div
+                id="questionControls"
+                style="display: none;"
+            >
+
+                <button
+                    id="selectAll"
+                    type="button"
+                >
+                    Select All
+                </button>
+
+                <button
+                    id="clearAll"
+                    type="button"
+                >
+                    Clear All
+                </button>
+
+                <strong id="selectedCount">
+                    Selected: 0
+                </strong>
+
+            </div>
+
+
+            <div id="questions">
+                Select a paper and topic to see questions.
+            </div>
+
+
+            <button
+                id="generateQCAB"
+                type="button"
+            >
+                Generate QCAB PDF
+            </button>
+
+
+            <button
+                id="downloadPDF"
+                type="button"
+            >
+                Download QCAB PDF
+            </button>
 
         </div>
 
     </div>
 
 
-    <!-- QUESTIONS -->
-
-    <div class="box">
-
-        <h2>
-            Questions
-            <span id="questionCount"></span>
-        </h2>
-
-        <div id="questionControls" style="display:none;">
-
-            <button id="selectAll" type="button">
-                Select All
-            </button>
-
-            <button id="clearAll" type="button">
-                Clear All
-            </button>
-
-            <strong id="selectedCount">
-                Selected: 0
-            </strong>
-
-        </div>
-
-        <div id="questions">
-            Select a paper and topic to see questions.
-        </div>
-
-        <button id="generateQCAB" type="button">
-            Generate QCAB PDF
-        </button>
-
-        <button id="downloadPDF" type="button">
-            Download QCAB PDF
-        </button>
-
-    </div>
-
-
-    <!-- jsPDF -->
+    <!-- ==========================================
+         jsPDF
+         ========================================== -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- html2canvas -->
+
+    <!-- ==========================================
+         html2canvas
+         ========================================== -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
+    <!-- ==========================================
+         SUPABASE
+         ========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
     <script>
 
+        // ==========================================
+        // SUPABASE CONFIGURATION
+        // ==========================================
+
+        const API_URL =
+            "https://govhlwqbobforvprdlps.supabase.co/functions/v1/get-questions";
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_lr04EFZActHWsuFS9S24QQ_ryPJMYFM";
+
+        const SUPABASE_URL =
+            "https://govhlwqbobforvprdlps.supabase.co";
+
+
+        // Create Supabase client
+
+        window.supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        // ==========================================
+        // AUTHENTICATION UI
+        // ==========================================
+
+        async function updateAuthUI() {
+
+            const {
+                data: { session }
+            } =
+                await window.supabaseClient.auth.getSession();
+
+
+            const loginScreen =
+                document.getElementById("loginScreen");
+
+            const mainContent =
+                document.getElementById("mainContent");
+
+            const logoutContainer =
+                document.getElementById("logoutContainer");
+
+
+            if (session) {
+
+                // ==================================
+                // LOGGED IN
+                // ==================================
+
+                loginScreen.style.display = "none";
+
+                mainContent.style.display = "block";
+
+                logoutContainer.style.display = "block";
+
+            } else {
+
+                // ==================================
+                // LOGGED OUT
+                // ==================================
+
+                loginScreen.style.display = "block";
+
+                mainContent.style.display = "none";
+
+                logoutContainer.style.display = "none";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+
+        document
+            .getElementById("loginButton")
+            .addEventListener(
+                "click",
+                async function () {
+
+                    const email =
+                        document
+                            .getElementById("loginEmail")
+                            .value
+                            .trim();
+
+                    const password =
+                        document
+                            .getElementById("loginPassword")
+                            .value;
+
+                    const message =
+                        document.getElementById(
+                            "loginMessage"
+                        );
+
+
+                    if (!email || !password) {
+
+                        message.textContent =
+                            "Please enter email and password.";
+
+                        return;
+                    }
+
+
+                    message.textContent =
+                        "Logging in...";
+
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await window.supabaseClient.auth
+                            .signInWithPassword({
+
+                                email: email,
+                                password: password
+
+                            });
+
+
+                    if (error) {
+
+                        message.textContent =
+                            error.message;
+
+                        return;
+                    }
+
+
+                    message.textContent =
+                        "Login successful!";
+
+
+                    await updateAuthUI();
+
+                }
+            );
+
+
+        // ==========================================
+        // LOGOUT
+        // ==========================================
+
+        document
+            .getElementById("logoutButton")
+            .addEventListener(
+                "click",
+                async function () {
+
+                    const logoutButton =
+                        document.getElementById(
+                            "logoutButton"
+                        );
+
+
+                    logoutButton.disabled = true;
+
+                    logoutButton.textContent =
+                        "Logging out...";
+
+
+                    const { error } =
+                        await window.supabaseClient.auth
+                            .signOut();
+
+
+                    if (error) {
+
+                        alert(
+                            "Logout failed: " +
+                            error.message
+                        );
+
+                        logoutButton.disabled = false;
+
+                        logoutButton.textContent =
+                            "Logout";
+
+                        return;
+                    }
+
+
+                    // Clear password field
+
+                    document
+                        .getElementById("loginPassword")
+                        .value = "";
+
+
+                    // Clear any generated PDF
+
+                    window.generatedPDF = null;
+
+
+                    // Hide download button
+
+                    const downloadButton =
+                        document.getElementById(
+                            "downloadPDF"
+                        );
+
+                    if (downloadButton) {
+                        downloadButton.style.display =
+                            "none";
+                    }
+
+
+                    // Update authentication UI
+
+                    await updateAuthUI();
+
+
+                    logoutButton.disabled = false;
+
+                    logoutButton.textContent =
+                        "Logout";
+
+
+                    document
+                        .getElementById("loginMessage")
+                        .textContent =
+                        "You have been logged out.";
+
+                }
+            );
+
+
+        // ==========================================
+        // SUPABASE AUTH STATE LISTENER
+        // ==========================================
+
+        window.supabaseClient.auth.onAuthStateChange(
+            function (event, session) {
+
+                const loginScreen =
+                    document.getElementById(
+                        "loginScreen"
+                    );
+
+                const mainContent =
+                    document.getElementById(
+                        "mainContent"
+                    );
+
+                const logoutContainer =
+                    document.getElementById(
+                        "logoutContainer"
+                    );
+
+
+                if (session) {
+
+                    loginScreen.style.display =
+                        "none";
+
+                    mainContent.style.display =
+                        "block";
+
+                    logoutContainer.style.display =
+                        "block";
+
+                } else {
+
+                    loginScreen.style.display =
+                        "block";
+
+                    mainContent.style.display =
+                        "none";
+
+                    logoutContainer.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // CHECK LOGIN WHEN PAGE LOADS
+        // ==========================================
+
+        updateAuthUI();
+
+
+        // ==========================================
+        // VARIABLES
+        // ==========================================
+
         let allQuestions = [];
+
         let selectionMode = "topic";
 
 
         // ==========================================
-        // LOAD QUESTIONS
+        // PAPER I TOPICS
         // ==========================================
 
-        fetch("questions.json")
+        const paperITopics = [
 
-            .then(response => {
+            "1.1 Meaning, Scope and development of Anthropology",
 
-                if (!response.ok) {
-                    throw new Error("Could not load questions.json");
+            "1.4 Human Evolution and emergence of Man",
+
+            "1.5 Characteristics of Primates",
+
+            "1.6 Phylogenetic status, characteristics and geographical distribution",
+
+            "1.7 The biological basis of life",
+
+            "1.8 Prehistoric Archaeology",
+
+            "2.1 Nature of Culture",
+
+            "2.2 Nature of Society",
+
+            "2.3 Marriage",
+
+            "2.4 Family",
+
+            "2.5 Kinship",
+
+            "3 Economic organization",
+
+            "4 Political organization and Social Control",
+
+            "5 Religion",
+
+            "6.1 Classical evolutionism (Tylor, Morgan and Frazer)",
+
+            "6.2 Historical particularism (Boas); Diffusionism (British, German and American)",
+
+            "6.3 Functionalism (Malinowski); Structural-functionalism (Radcliffe-Brown)",
+
+            "6.4 Structuralism (Levi-Strauss and E. Leach)",
+
+            "6.5 Culture and personality (Benedict, Mead, Linton, Kardiner and Cora-du-Bois)",
+
+            "6.6 Neo-evolutionism (Childe, White, Steward, Sahlins and Service)",
+
+            "6.7 Cultural materialism (Harris)",
+
+            "6.8 Symbolic and interpretive theories (Turner, Schneider and Geertz)",
+
+            "6.9 Cognitive theories (Tyler, Conklin)",
+
+            "6.10 Post-modernism in anthropology",
+
+            "7. Culture, language and communication",
+
+            "8. Research methods in anthropology",
+
+            "9.1 Human Genetics: Methods and Application",
+
+            "9.2 Mendelian genetics",
+
+            "9.3 Genetic polymorphism/selection/Hardy-Weinberg/evolutionary forces/inbreeding/consanguinity/genetic load",
+
+            "9.4 Chromosomes/aberrations, sex/autosomal syndromes, genetic imprinting/screening/counselling/DNA profiling/gene mapping/genome study",
+
+            "9.5 Race/racism/morphological variation/racial criteria/classification/differentiation/race crossing",
+
+            "9.6 Genetic markers/blood groups/physiology",
+
+            "9.7 Ecological Anthropology/biocultural adaptation/environmental stresses/conservation",
+
+            "9.8 Epidemiological Anthropology/health/disease/malnutrition",
+
+            "10 Human growth/development/somatotypes/ageing/growth methods",
+
+            "11.1 menarche/menopause/fertility",
+
+            "11.2 demographic theories",
+
+            "11.3 bio-social determinants of fecundity/fertility/natality/mortality",
+
+            "12 Applications of Anthropology"
+
+        ];
+
+
+        // ==========================================
+        // PAPER II TOPICS
+        // ==========================================
+
+        const paperIITopics = [
+
+            "1.1 Evolution of Indian Culture and Civilization",
+
+            "1.2 Palaeo-Anthropological evidences from India",
+
+            "1.3 Ethno-archaeology in India",
+
+            "2. Demographic profile of India",
+
+            "3.1 The structure and nature of traditional Indian Social System",
+
+            "3.2 Caste system in India",
+
+            "3.3 Sacred Complex & Nature-Man-Spirit Complex",
+
+            "3.4 Impact of Buddhism, Jainism, Islam and Christianity on Indian society",
+
+            "4. Emergence and growth of anthropology in India",
+
+            "5.1 Indian Village",
+
+            "5.2 Linguistic and Religious minorities",
+
+            "5.3 Indigenous and exogenous processes of socio-cultural change",
+
+            "6.1 Tribal situation in India",
+
+            "6.2 Problems of the tribal Communities",
+
+            "6.3 Developmental projects and their impact on tribal",
+
+            "7.1 Problems of Exploitation and Deprivation of SCs, STs and OBCs",
+
+            "7.2 Social Change and Contemporary Tribal societies",
+
+            "7.3 The Concept of Ethnicity",
+
+            "8.1 Impact of Hinduism, Buddhism, Christianity, Islam and other religions on tribal societies",
+
+            "8.2 Tribe & Nation state-comparative study of tribal communities",
+
+            "9.1 History of administration of tribal areas",
+
+            "9.2 Role of Anthropology in Tribal and Rural Development",
+
+            "9.3 Contributions of Anthropology to the Understanding of Regionalism, Communalism, & Ethnic and Political Movements"
+
+        ];
+
+
+        // ==========================================
+        // LOAD TOPIC DROPDOWN
+        // ==========================================
+
+        function loadTopics() {
+
+            const selectedPaper =
+                document.getElementById("paper").value;
+
+            const topicSelect =
+                document.getElementById("topic");
+
+
+            topicSelect.innerHTML =
+                '<option value="">Select Topic</option>';
+
+
+            if (!selectedPaper) {
+                return;
+            }
+
+
+            const topics =
+                selectedPaper === "Paper I"
+                    ? paperITopics
+                    : paperIITopics;
+
+
+            topics.forEach(topic => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = topic;
+
+                option.textContent = topic;
+
+                topicSelect.appendChild(option);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // LOAD YEAR DROPDOWN
+        // ==========================================
+
+        function loadYears() {
+
+            const yearSelect =
+                document.getElementById("year");
+
+
+            yearSelect.innerHTML =
+                '<option value="">Select Year</option>';
+
+
+            const years = [
+
+                2026,
+                2025,
+                2024,
+                2023,
+                2022,
+                2021,
+                2020,
+                2019,
+                2018,
+                2017,
+                2016
+
+            ];
+
+
+            years.forEach(year => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = year;
+
+                option.textContent = year;
+
+                yearSelect.appendChild(option);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // FETCH QUESTIONS FROM SUPABASE
+        // ==========================================
+
+        async function fetchQuestions(filters) {
+
+            try {
+
+                const {
+                    data: { session }
+                } =
+                    await window.supabaseClient.auth
+                        .getSession();
+
+
+                // ==================================
+                // EXTRA AUTH CHECK
+                // ==================================
+
+                if (!session) {
+
+                    alert(
+                        "Please login first."
+                    );
+
+                    await updateAuthUI();
+
+                    return [];
+
                 }
 
-                return response.json();
 
-            })
+                const response =
+                    await fetch(API_URL, {
 
-            .then(data => {
+                        method: "POST",
 
-                allQuestions = data.questions_repository;
+                        headers: {
 
-                console.log(
-                    "Questions loaded:",
-                    allQuestions
-                );
+                            "Content-Type":
+                                "application/json",
 
-            })
+                            "apikey":
+                                SUPABASE_PUBLISHABLE_KEY,
 
-            .catch(error => {
+                            "Authorization":
+                                "Bearer " +
+                                session.access_token
+
+                        },
+
+                        body:
+                            JSON.stringify(filters)
+
+                    });
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server returned " +
+                        response.status
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.error) {
+
+                    throw new Error(
+                        data.error
+                    );
+
+                }
+
+
+                return data.questions || [];
+
+
+            } catch (error) {
 
                 console.error(
                     "Error loading questions:",
                     error
                 );
 
-                document.getElementById("questions").innerHTML =
-                    "Error loading questions.json";
+                throw error;
 
-            });
+            }
+
+        }
 
 
         // ==========================================
@@ -325,21 +1118,26 @@
 
                     selectionMode = "topic";
 
+
                     document
                         .getElementById("topicMode")
                         .classList.add("active");
+
 
                     document
                         .getElementById("yearMode")
                         .classList.remove("active");
 
+
                     document
                         .getElementById("topicSection")
                         .style.display = "block";
 
+
                     document
                         .getElementById("yearSection")
                         .style.display = "none";
+
 
                     resetQuestions();
 
@@ -357,21 +1155,26 @@
 
                     selectionMode = "year";
 
+
                     document
                         .getElementById("yearMode")
                         .classList.add("active");
+
 
                     document
                         .getElementById("topicMode")
                         .classList.remove("active");
 
+
                     document
                         .getElementById("topicSection")
                         .style.display = "none";
 
+
                     document
                         .getElementById("yearSection")
                         .style.display = "block";
+
 
                     resetQuestions();
 
@@ -382,7 +1185,7 @@
 
 
         // ==========================================
-        // PAPER CHANGES
+        // PAPER CHANGE
         // ==========================================
 
         document
@@ -392,6 +1195,7 @@
                 function () {
 
                     resetQuestions();
+
 
                     if (selectionMode === "topic") {
 
@@ -408,129 +1212,7 @@
 
 
         // ==========================================
-        // LOAD TOPICS
-        // ==========================================
-
-        function loadTopics() {
-
-            const selectedPaper =
-                document
-                    .getElementById("paper")
-                    .value;
-
-            const topicSelect =
-                document
-                    .getElementById("topic");
-
-            topicSelect.innerHTML =
-                '<option value="">Select Topic</option>';
-
-            if (!selectedPaper) {
-                return;
-            }
-
-            const topics = [
-                ...new Set(
-
-                    allQuestions
-
-                        .filter(question =>
-                            question.paper === selectedPaper
-                        )
-
-                        .map(question =>
-                            question.topic
-                        )
-
-                        .filter(topic => topic)
-
-                )
-            ];
-
-            topics.forEach(topic => {
-
-                const option =
-                    document.createElement("option");
-
-                option.value = topic;
-                option.textContent = topic;
-
-                topicSelect.appendChild(option);
-
-            });
-
-        }
-
-
-        // ==========================================
-        // LOAD YEARS
-        // ==========================================
-
-        function loadYears() {
-
-            const selectedPaper =
-                document
-                    .getElementById("paper")
-                    .value;
-
-            const yearSelect =
-                document
-                    .getElementById("year");
-
-            yearSelect.innerHTML =
-                '<option value="">Select Year</option>';
-
-            if (!selectedPaper) {
-                return;
-            }
-
-            const years = [
-
-                ...new Set(
-
-                    allQuestions
-
-                        .filter(question =>
-                            question.paper === selectedPaper
-                        )
-
-                        .filter(question =>
-                            Number(question.year) >= 2016
-                        )
-
-                        .map(question =>
-                            Number(question.year)
-                        )
-
-                        .filter(year =>
-                            !isNaN(year)
-                        )
-
-                )
-
-            ];
-
-            years.sort(
-                (a, b) => b - a
-            );
-
-            years.forEach(year => {
-
-                const option =
-                    document.createElement("option");
-
-                option.value = year;
-                option.textContent = year;
-
-                yearSelect.appendChild(option);
-
-            });
-
-        }
-
-
-        // ==========================================
-        // TOPIC CHANGES
+        // TOPIC CHANGE
         // ==========================================
 
         document
@@ -542,7 +1224,7 @@
 
 
         // ==========================================
-        // YEAR CHANGES
+        // YEAR CHANGE
         // ==========================================
 
         document
@@ -557,16 +1239,15 @@
         // SHOW QUESTIONS
         // ==========================================
 
-        function showQuestions() {
+        async function showQuestions() {
 
             const selectedPaper =
-                document
-                    .getElementById("paper")
-                    .value;
+                document.getElementById("paper").value;
+
 
             const questionContainer =
-                document
-                    .getElementById("questions");
+                document.getElementById("questions");
+
 
             if (!selectedPaper) {
 
@@ -577,8 +1258,6 @@
 
             }
 
-            let matchingQuestions = [];
-
 
             // ======================================
             // TOPIC-WISE
@@ -587,9 +1266,8 @@
             if (selectionMode === "topic") {
 
                 const selectedTopic =
-                    document
-                        .getElementById("topic")
-                        .value;
+                    document.getElementById("topic").value;
+
 
                 if (!selectedTopic) {
 
@@ -600,14 +1278,41 @@
 
                 }
 
-                matchingQuestions =
-                    allQuestions.filter(question =>
 
-                        question.paper === selectedPaper &&
+                questionContainer.innerHTML =
+                    '<div id="loadingMessage">Loading questions...</div>';
 
-                        question.topic === selectedTopic
 
+                document
+                    .getElementById("questionControls")
+                    .style.display = "none";
+
+
+                try {
+
+                    allQuestions =
+                        await fetchQuestions({
+
+                            paper:
+                                selectedPaper,
+
+                            topic:
+                                selectedTopic
+
+                        });
+
+
+                    displayQuestions(
+                        allQuestions
                     );
+
+
+                } catch (error) {
+
+                    questionContainer.innerHTML =
+                        "Error loading questions. Please try again.";
+
+                }
 
             }
 
@@ -619,9 +1324,8 @@
             else {
 
                 const selectedYear =
-                    document
-                        .getElementById("year")
-                        .value;
+                    document.getElementById("year").value;
+
 
                 if (!selectedYear) {
 
@@ -632,134 +1336,201 @@
 
                 }
 
-                matchingQuestions =
-                    allQuestions.filter(question =>
-
-                        question.paper === selectedPaper &&
-
-                        Number(question.year) ===
-                        Number(selectedYear) &&
-
-                        Number(question.year) >= 2016
-
-                    );
-
-            }
-
-
-            // ======================================
-            // SORT
-            // ======================================
-
-            matchingQuestions.sort(
-                (a, b) =>
-                    Number(b.year) - Number(a.year)
-            );
-
-
-            // ======================================
-            // NO QUESTIONS
-            // ======================================
-
-            if (matchingQuestions.length === 0) {
 
                 questionContainer.innerHTML =
-                    "No questions found.";
+                    '<div id="loadingMessage">Loading questions...</div>';
+
 
                 document
                     .getElementById("questionControls")
                     .style.display = "none";
 
+
+                try {
+
+                    allQuestions =
+                        await fetchQuestions({
+
+                            paper:
+                                selectedPaper,
+
+                            year:
+                                Number(selectedYear)
+
+                        });
+
+
+                    displayQuestions(
+                        allQuestions
+                    );
+
+
+                } catch (error) {
+
+                    questionContainer.innerHTML =
+                        "Error loading questions. Please try again.";
+
+                }
+
+            }
+
+        }
+
+
+        // ==========================================
+        // DISPLAY QUESTIONS
+        // ==========================================
+
+        function displayQuestions(
+            matchingQuestions
+        ) {
+
+            const questionContainer =
+                document.getElementById(
+                    "questions"
+                );
+
+
+            // SORT
+
+            matchingQuestions.sort(
+
+                (a, b) =>
+                    Number(b.year) -
+                    Number(a.year)
+
+            );
+
+
+            // NO QUESTIONS
+
+            if (
+                matchingQuestions.length === 0
+            ) {
+
+                questionContainer.innerHTML =
+                    "No questions found.";
+
+
                 document
-                    .getElementById("questionCount")
+                    .getElementById(
+                        "questionControls"
+                    )
+                    .style.display = "none";
+
+
+                document
+                    .getElementById(
+                        "questionCount"
+                    )
                     .textContent = "";
+
 
                 return;
 
             }
 
 
-            // ======================================
             // CLEAR OLD QUESTIONS
-            // ======================================
 
-            questionContainer.innerHTML = "";
+            questionContainer.innerHTML =
+                "";
 
 
-            // ======================================
             // SHOW CONTROLS
-            // ======================================
 
             document
-                .getElementById("questionControls")
+                .getElementById(
+                    "questionControls"
+                )
                 .style.display = "block";
 
-            document
-                .getElementById("questionCount")
-                .textContent =
-                " (" + matchingQuestions.length + ")";
 
             document
-                .getElementById("selectedCount")
+                .getElementById(
+                    "questionCount"
+                )
+                .textContent =
+                " (" +
+                matchingQuestions.length +
+                ")";
+
+
+            document
+                .getElementById(
+                    "selectedCount"
+                )
                 .textContent =
                 "Selected: 0";
 
 
-            // ======================================
             // DISPLAY QUESTIONS
-            // ======================================
 
-            matchingQuestions.forEach(question => {
+            matchingQuestions.forEach(
+                question => {
 
-                const div =
-                    document.createElement("div");
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
 
-                div.className = "question";
 
-                div.innerHTML = `
+                    div.className =
+                        "question";
 
-                    <input
-                        type="checkbox"
-                        value="${question.question_id || question.id}"
-                    >
 
-                    <label>
+                    div.innerHTML = `
 
-                        <strong>
-                            ${question.year || ""}
-                        </strong>
+                        <input
+                            type="checkbox"
+                            value="${
+                                question.question_id ||
+                                question.id
+                            }"
+                        >
 
-                        <br>
+                        <label>
 
-                        ${question.question_text}
+                            <strong>
+                                ${question.year || ""}
+                            </strong>
 
-                        <br>
+                            <br>
 
-                        <small>
+                            ${question.question_text}
 
-                            ${
-                                question.marks != null
-                                ? question.marks + " Marks"
-                                : "Marks not specified"
-                            }
+                            <br>
 
-                            ${
-                                question.word_limit
-                                ? " | " +
-                                  question.word_limit +
-                                  " Words"
-                                : ""
-                            }
+                            <small>
 
-                        </small>
+                                ${
+                                    question.marks != null
+                                    ? question.marks +
+                                      " Marks"
+                                    : "Marks not specified"
+                                }
 
-                    </label>
+                                ${
+                                    question.word_limit
+                                    ? " | " +
+                                      question.word_limit +
+                                      " Words"
+                                    : ""
+                                }
 
-                `;
+                            </small>
 
-                questionContainer.appendChild(div);
+                        </label>
 
-            });
+                    `;
+
+
+                    questionContainer.appendChild(
+                        div
+                    );
+
+                }
+            );
 
         }
 
@@ -770,21 +1541,33 @@
 
         function resetQuestions() {
 
+            allQuestions = [];
+
+
             document
                 .getElementById("questions")
                 .innerHTML =
                 "Select a paper and topic to see questions.";
 
+
             document
-                .getElementById("questionControls")
+                .getElementById(
+                    "questionControls"
+                )
                 .style.display = "none";
 
-            document
-                .getElementById("questionCount")
-                .textContent = "";
 
             document
-                .getElementById("selectedCount")
+                .getElementById(
+                    "questionCount"
+                )
+                .textContent = "";
+
+
+            document
+                .getElementById(
+                    "selectedCount"
+                )
                 .textContent =
                 "Selected: 0";
 
@@ -806,11 +1589,16 @@
                             '#questions input[type="checkbox"]'
                         );
 
-                    checkboxes.forEach(checkbox => {
 
-                        checkbox.checked = true;
+                    checkboxes.forEach(
+                        checkbox => {
 
-                    });
+                            checkbox.checked =
+                                true;
+
+                        }
+                    );
+
 
                     updateSelectedCount();
 
@@ -833,11 +1621,16 @@
                             '#questions input[type="checkbox"]'
                         );
 
-                    checkboxes.forEach(checkbox => {
 
-                        checkbox.checked = false;
+                    checkboxes.forEach(
+                        checkbox => {
 
-                    });
+                            checkbox.checked =
+                                false;
+
+                        }
+                    );
+
 
                     updateSelectedCount();
 
@@ -856,10 +1649,14 @@
                     '#questions input[type="checkbox"]:checked'
                 );
 
+
             document
-                .getElementById("selectedCount")
+                .getElementById(
+                    "selectedCount"
+                )
                 .textContent =
-                "Selected: " + checkedBoxes.length;
+                "Selected: " +
+                checkedBoxes.length;
 
         }
 
@@ -875,7 +1672,8 @@
                 function (event) {
 
                     if (
-                        event.target.type === "checkbox"
+                        event.target.type ===
+                        "checkbox"
                     ) {
 
                         updateSelectedCount();
@@ -890,38 +1688,78 @@
         // SELECTED QUESTIONS
         // ==========================================
 
-        window.getSelectedQuestions = function () {
+        window.getSelectedQuestions =
+            function () {
 
-            const checkedBoxes =
-                document.querySelectorAll(
-                    '#questions input[type="checkbox"]:checked'
+                const checkedBoxes =
+                    document.querySelectorAll(
+                        '#questions input[type="checkbox"]:checked'
+                    );
+
+
+                const selectedIds =
+                    Array.from(
+                        checkedBoxes
+                    ).map(
+                        checkbox =>
+                            String(
+                                checkbox.value
+                            )
+                    );
+
+
+                const selectedQuestions =
+                    allQuestions.filter(
+                        question => {
+
+                            const questionId =
+                                String(
+                                    question.question_id ||
+                                    question.id
+                                );
+
+
+                            return selectedIds.includes(
+                                questionId
+                            );
+
+                        }
+                    );
+
+
+                console.log(
+                    "Selected IDs:",
+                    selectedIds
                 );
 
-            const selectedIds =
-                Array.from(checkedBoxes).map(
-                    checkbox =>
-                        checkbox.value
+
+                console.log(
+                    "Selected questions:",
+                    selectedQuestions
                 );
 
-            const selectedQuestions =
-                allQuestions.filter(question =>
 
-                    selectedIds.includes(
-                        question.question_id || question.id
-                    )
+                return selectedQuestions;
 
-                );
+            };
 
-            return selectedQuestions;
 
-        };
+        // ==========================================
+        // INITIAL LOAD
+        // ==========================================
+
+        loadTopics();
 
     </script>
 
 
-    <!-- ORIGINAL QCAB PDF GENERATOR -->
+    <!-- ==========================================
+         ORIGINAL QCAB PDF GENERATOR
+         ========================================== -->
 
     <script src="js/generatePDF.js"></script>
 
+
 </body>
+
 </html>
