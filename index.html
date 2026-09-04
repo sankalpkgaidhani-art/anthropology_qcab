@@ -1,721 +1,753 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Anthropology QCAB Generator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-    :root {
-        --primary: #4f46e5;
-        --primary-dark: #3730a3;
-        --bg: #f5f3ff;
-        --card: #ffffff;
-        --text: #1e1b4b;
-        --muted: #6b7280;
-        --border: #ddd6fe;
-        --success: #15803d;
-        --danger: #dc2626;
-    }
+<title>Anthropology QCAB Generator</title>
 
-    * {
-        box-sizing: border-box;
-    }
+<style>
 
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background:
-            radial-gradient(circle at top left, #ede9fe 0%, transparent 35%),
-            radial-gradient(circle at bottom right, #fef3c7 0%, transparent 30%),
-            var(--bg);
-        color: var(--text);
-    }
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --bg: #f5f3ff;
+    --card: #ffffff;
+    --text: #1e1b4b;
+    --muted: #6b7280;
+    --border: #ddd6fe;
+    --success: #15803d;
+    --danger: #dc2626;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #ede9fe 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #fef3c7 0%, transparent 30%),
+        var(--bg);
+    color: var(--text);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #312e81;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.plan-message {
+    max-width: 850px;
+    margin: 0 auto 30px;
+    padding: 11px 16px;
+    background: #ede9fe;
+    border: 1px solid #ddd6fe;
+    border-radius: 8px;
+    text-align: center;
+    color: #3730a3;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.07);
+}
+
+.card h3 {
+    color: #312e81;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #37334f;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 16px;
+    background: #fafaff;
+    color: var(--text);
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+    font-size: 15px;
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+button.secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+button.secondary:hover {
+    background: #d1d5db;
+}
+
+button.danger {
+    background: var(--danger);
+}
+
+button.danger:hover {
+    background: #b91c1c;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mode-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.mode-button {
+    flex: 1;
+    min-width: 220px;
+    padding: 18px 24px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.mode-button:hover {
+    background: #d1d5db;
+    transform: translateY(-2px);
+}
+
+.mode-button.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 5px 14px rgba(79, 70, 229, 0.22);
+}
+
+.mode-button.active:hover {
+    background: var(--primary-dark);
+}
+
+.question {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #fcfcff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.question:hover {
+    border-color: #a5b4fc;
+    box-shadow: 0 3px 10px rgba(79, 70, 229, 0.07);
+}
+
+.question label {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.question input[type="checkbox"] {
+    width: auto;
+    margin-top: 3px;
+    margin-bottom: 0;
+    accent-color: var(--primary);
+}
+
+.question-meta {
+    font-size: 13px;
+    color: #7c3aed;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.selected-count {
+    margin: 15px 0;
+    font-weight: 600;
+    color: #3730a3;
+    background: #ede9fe;
+    padding: 7px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+#loginScreen {
+    max-width: 430px;
+    margin: 70px auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.10);
+}
+
+#loginScreen h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #312e81;
+}
+
+#loginMessage {
+    text-align: center;
+    margin-top: 15px;
+    color: var(--danger);
+    font-size: 14px;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.auth-links button {
+    background: none;
+    color: var(--primary);
+    padding: 4px;
+    font-size: 14px;
+}
+
+.auth-links button:hover {
+    background: none;
+    text-decoration: underline;
+    transform: none;
+}
+
+#logoutContainer {
+    max-width: 1000px;
+    margin: 15px auto 0;
+    padding: 0 20px;
+    text-align: right;
+}
+
+#logoutButton {
+    background: var(--danger);
+}
+
+#logoutButton:hover {
+    background: #b91c1c;
+}
+
+.creator-credit {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #7c3aed;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.success-message {
+    color: var(--success);
+    text-align: center;
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
 
     .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 30px 20px;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 8px;
-        color: #312e81;
-        letter-spacing: -0.5px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: var(--muted);
-        margin-bottom: 30px;
+        padding: 20px 12px;
     }
 
     .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.07);
-    }
-
-    .card h3 {
-        color: #312e81;
-    }
-
-    label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 7px;
-        color: #37334f;
-    }
-
-    select,
-    input {
-        width: 100%;
-        padding: 11px 12px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        font-size: 15px;
-        margin-bottom: 16px;
-        background: #fafaff;
-        color: var(--text);
-    }
-
-    select:focus,
-    input:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-    }
-
-    button {
-        border: none;
-        border-radius: 8px;
-        padding: 11px 18px;
-        font-size: 15px;
-        cursor: pointer;
-        background: var(--primary);
-        color: white;
-        transition: background 0.15s ease, transform 0.15s ease;
-    }
-
-    button:hover {
-        background: var(--primary-dark);
-        transform: translateY(-1px);
-    }
-
-    button.secondary {
-        background: #e5e7eb;
-        color: #374151;
-    }
-
-    button.secondary:hover {
-        background: #d1d5db;
-    }
-
-    button.danger {
-        background: var(--danger);
-    }
-
-    button.danger:hover {
-        background: #b91c1c;
-    }
-
-    .button-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .mode-row {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-
-    .mode-button {
-        flex: 1;
-        min-width: 220px;
-        padding: 18px 24px;
-        font-size: 17px;
-        font-weight: 600;
-        border-radius: 10px;
-        background: #e5e7eb;
-        color: #374151;
-    }
-
-    .mode-button:hover {
-        background: #d1d5db;
-        transform: translateY(-2px);
-    }
-
-    .mode-button.active {
-        background: var(--primary);
-        color: white;
-        box-shadow: 0 5px 14px rgba(79, 70, 229, 0.22);
-    }
-
-    .mode-button.active:hover {
-        background: var(--primary-dark);
-    }
-
-    .question {
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 10px;
-        background: #fcfcff;
-        transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .question:hover {
-        border-color: #a5b4fc;
-        box-shadow: 0 3px 10px rgba(79, 70, 229, 0.07);
-    }
-
-    .question label {
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        font-weight: normal;
-        cursor: pointer;
-    }
-
-    .question input[type="checkbox"] {
-        width: auto;
-        margin-top: 3px;
-        margin-bottom: 0;
-        accent-color: var(--primary);
-    }
-
-    .question-meta {
-        font-size: 13px;
-        color: #7c3aed;
-        margin-bottom: 6px;
-        font-weight: 600;
-    }
-
-    .selected-count {
-        margin: 15px 0;
-        font-weight: 600;
-        color: #3730a3;
-        background: #ede9fe;
-        padding: 7px 12px;
-        border-radius: 20px;
-        display: inline-block;
+        padding: 18px;
     }
 
     #loginScreen {
-        max-width: 430px;
-        margin: 70px auto;
-        background: white;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.10);
+        margin: 30px 15px;
     }
 
-    #loginScreen h2 {
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 25px;
-        color: #312e81;
+    .mode-row {
+        flex-direction: column;
     }
 
-    #loginMessage {
-        text-align: center;
-        margin-top: 15px;
-        color: var(--danger);
-        font-size: 14px;
+    .mode-button {
+        width: 100%;
+        min-width: 0;
+        padding: 16px 20px;
     }
 
-    .auth-links {
-        text-align: center;
-        margin-top: 18px;
-    }
+}
 
-    .auth-links button {
-        background: none;
-        color: var(--primary);
-        padding: 4px;
-        font-size: 14px;
-    }
-
-    .auth-links button:hover {
-        background: none;
-        text-decoration: underline;
-        transform: none;
-    }
-
-    #logoutContainer {
-        max-width: 1000px;
-        margin: 15px auto 0;
-        padding: 0 20px;
-        text-align: right;
-    }
-
-    #logoutButton {
-        background: var(--danger);
-    }
-
-    #logoutButton:hover {
-        background: #b91c1c;
-    }
-
-    .creator-credit {
-        margin-top: 14px;
-        font-size: 12px;
-        color: #7c3aed;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-
-    .success-message {
-        color: var(--success);
-        text-align: center;
-        margin-top: 15px;
-    }
-
-    @media (max-width: 600px) {
-        .container {
-            padding: 20px 12px;
-        }
-
-        .card {
-            padding: 18px;
-        }
-
-        #loginScreen {
-            margin: 30px 15px;
-        }
-
-        .mode-row {
-            flex-direction: column;
-        }
-
-        .mode-button {
-            width: 100%;
-            min-width: 0;
-            padding: 16px 20px;
-        }
-    }
 </style>
+
 </head>
 
 <body>
 
-    <!-- =========================
-         LOGIN SCREEN
-    ========================== -->
+<!-- =========================
+     LOGIN SCREEN
+========================== -->
 
-    <div id="loginScreen">
+<div id="loginScreen">
 
-        <h2>Anthropology QCAB</h2>
+```
+<h2>Anthropology QCAB</h2>
 
-        <div id="loginForm">
+<div id="loginForm">
 
-            <label for="loginEmail">Email</label>
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Enter your email"
-                autocomplete="email"
-            >
+    <label for="loginEmail">Email</label>
 
-            <label for="loginPassword">Password</label>
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-            >
-
-            <button
-                id="loginButton"
-                type="button"
-                style="width: 100%;"
-            >
-                Login
-            </button>
-
-            <div class="auth-links">
-
-                <button
-                    id="showSignupButton"
-                    type="button"
-                >
-                    Create a new account
-                </button>
-
-                <br>
-
-                <button
-                    id="forgotPasswordButton"
-                    type="button"
-                >
-                    Forgot password?
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             SIGNUP FORM
-        ========================== -->
-
-        <div id="signupForm" class="hidden">
-
-            <h3 style="text-align:center;">Create Account</h3>
-
-            <label for="signupEmail">Email</label>
-
-            <input
-                type="email"
-                id="signupEmail"
-                placeholder="Enter your email"
-                autocomplete="email"
-            >
-
-            <label for="signupPassword">Password</label>
-
-            <input
-                type="password"
-                id="signupPassword"
-                placeholder="Create a password"
-                autocomplete="new-password"
-            >
-
-            <button
-                id="signupButton"
-                type="button"
-                style="width: 100%;"
-            >
-                Create Account
-            </button>
-
-            <div class="auth-links">
-
-                <button
-                    id="backToLoginButton"
-                    type="button"
-                >
-                    Already have an account? Login
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <p id="loginMessage"></p>
-
-    </div>
-
-
-    <!-- =========================
-         LOGOUT
-    ========================== -->
-
-    <div
-        id="logoutContainer"
-        style="display: none;"
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Enter your email"
+        autocomplete="email"
     >
+
+    <label for="loginPassword">Password</label>
+
+    <input
+        type="password"
+        id="loginPassword"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+    >
+
+    <button
+        id="loginButton"
+        type="button"
+        style="width: 100%;"
+    >
+        Login
+    </button>
+
+    <div class="auth-links">
+
         <button
-            id="logoutButton"
+            id="showSignupButton"
             type="button"
         >
-            Logout
+            Create a new account
         </button>
 
-         <div class="creator-credit">Made by Sankalp10_04</div>
+        <br>
+
+        <button
+            id="forgotPasswordButton"
+            type="button"
+        >
+            Forgot password?
+        </button>
+
     </div>
+
+</div>
+
+
+<!-- =========================
+     SIGNUP FORM
+========================== -->
+
+<div id="signupForm" class="hidden">
+
+    <h3 style="text-align:center;">Create Account</h3>
+
+    <label for="signupEmail">Email</label>
+
+    <input
+        type="email"
+        id="signupEmail"
+        placeholder="Enter your email"
+        autocomplete="email"
+    >
+
+    <label for="signupPassword">Password</label>
+
+    <input
+        type="password"
+        id="signupPassword"
+        placeholder="Create a password"
+        autocomplete="new-password"
+    >
+
+    <button
+        id="signupButton"
+        type="button"
+        style="width: 100%;"
+    >
+        Create Account
+    </button>
+
+    <div class="auth-links">
+
+        <button
+            id="backToLoginButton"
+            type="button"
+        >
+            Already have an account? Login
+        </button>
+
+    </div>
+
+</div>
+
+<p id="loginMessage"></p>
+```
+
+</div>
+
+<!-- =========================
+     LOGOUT
+========================== -->
+
+<div id="logoutContainer" style="display: none;">
+    <button id="logoutButton" type="button">
+        Logout
+    </button>
+
+    <div class="creator-credit">
+        Made by Sankalp10_04
+    </div>
+</div>
+
+<!-- =========================
+     MAIN QCAB GENERATOR
+========================== -->
+
+<div
+    id="mainContent"
+    style="display: none;"
+>
+
+```
+<div class="container">
+
+    <h1>Anthropology QCAB Generator</h1>
+
+    <p class="subtitle">
+        Generate UPSC Anthropology Optional Question-Cum-Answer Booklets
+    </p>
 
 
     <!-- =========================
-         MAIN QCAB GENERATOR
+         PLAN MESSAGE
     ========================== -->
 
     <div
-        id="mainContent"
+        id="planMessage"
+        class="plan-message"
         style="display: none;"
-    >
-
-        <div class="container">
-
-            <h1>Anthropology QCAB Generator</h1>
-
-            <p class="subtitle">
-                Generate UPSC Anthropology Optional Question-Cum-Answer Booklets
-            </p>
-            
+    ></div>
 
 
-            <!-- MODE -->
+    <!-- MODE -->
 
-            <div class="card">
+    <div class="card">
 
-                <h3>Selection Mode</h3>
+        <h3>Selection Mode</h3>
 
-                <div class="mode-row">
+        <div class="mode-row">
 
-                    <button
-                        id="topicModeButton"
-                        class="mode-button active"
-                        type="button"
-                    >
-                        Topic-wise
-                    </button>
-
-                    <button
-                        id="yearModeButton"
-                        class="mode-button"
-                        type="button"
-                    >
-                        Year-wise
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- FILTERS -->
-
-            <div class="card">
-
-                <h3>Choose Questions</h3>
-
-                <label for="paperSelect">
-                    Anthropology Paper
-                </label>
-
-                <select id="paperSelect">
-
-                    <option value="">
-                        Select Paper
-                    </option>
-
-                    <option value="Paper I">
-                        Paper I
-                    </option>
-
-                    <option value="Paper II">
-                        Paper II
-                    </option>
-
-                </select>
-
-
-                <!-- TOPIC FILTER -->
-
-                <div id="topicSection">
-
-                    <label for="topicSelect">
-                        Topic
-                    </label>
-
-                    <select id="topicSelect">
-
-                        <option value="">
-                            Select Topic
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- YEAR FILTER -->
-
-                <div id="yearSection">
-
-                    <label for="yearSelect">
-                        Year
-                    </label>
-
-                    <select id="yearSelect">
-
-                        <option value="">
-                            Select Year
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="button-row">
-
-                    <button
-                        id="loadQuestions"
-                        type="button"
-                    >
-                        Load Questions
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- QUESTIONS -->
-
-            <div
-                class="card"
-                id="questionsCard"
-                style="display:none;"
+            <button
+                id="topicModeButton"
+                class="mode-button active"
+                type="button"
             >
+                Topic-wise
+            </button>
 
-                <h3>Select Questions</h3>
-
-                <div class="button-row">
-
-                    <button
-                        id="selectAll"
-                        type="button"
-                    >
-                        Select All
-                    </button>
-
-                    <button
-                        id="clearAll"
-                        type="button"
-                        class="secondary"
-                    >
-                        Clear All
-                    </button>
-
-                </div>
-
-                <div
-                    id="selectedCount"
-                    class="selected-count"
-                >
-                    Selected: 0
-                </div>
-
-                <div id="questionsList"></div>
-
-            </div>
-
-
-            <!-- GENERATE -->
-
-            <div
-                class="card"
-                id="generateCard"
-                style="display:none;"
+            <button
+                id="yearModeButton"
+                class="mode-button"
+                type="button"
             >
-
-                <h3>Generate QCAB</h3>
-
-                <p>
-                    Generate a PDF containing the selected questions
-                    followed by answer-writing pages.
-                </p>
-
-                <button
-                    id="generateQCAB"
-                    type="button"
-                >
-                    Generate QCAB PDF
-                </button>
-
-                <div style="margin-top:15px;">
-
-                    <button
-                        id="downloadQCAB"
-                        type="button"
-                        style="display:none;"
-                    >
-                        Download QCAB PDF
-                    </button>
-
-                </div>
-
-            </div>
+                Year-wise
+            </button>
 
         </div>
 
     </div>
 
 
-    <!-- =========================
-         LIBRARIES
-    ========================== -->
+    <!-- FILTERS -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <div class="card">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <h3>Choose Questions</h3>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <label for="paperSelect">
+            Anthropology Paper
+        </label>
 
+        <select id="paperSelect">
 
-    <!-- =========================
-         SUPABASE + APP LOGIC
-    ========================== -->
+            <option value="">
+                Select Paper
+            </option>
 
-    <script>
+            <option value="Paper I">
+                Paper I
+            </option>
 
-        /* =========================================
-           SUPABASE CONFIGURATION
-        ========================================= */
+            <option value="Paper II">
+                Paper II
+            </option>
 
-        const API_URL =
-            "https://govhlwqbobforvprdlps.supabase.co/functions/v1/get-questions";
-
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_lr04EFZActHWsuFS9S24QQ_ryPJMYFM";
-
-        const SUPABASE_URL =
-            "https://govhlwqbobforvprdlps.supabase.co";
+        </select>
 
 
-        window.supabaseClient =
-            supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_PUBLISHABLE_KEY
-            );
+        <!-- TOPIC FILTER -->
+
+        <div id="topicSection">
+
+            <label for="topicSelect">
+                Topic
+            </label>
+
+            <select id="topicSelect">
+
+                <option value="">
+                    Select Topic
+                </option>
+
+            </select>
+
+        </div>
 
 
-        /* =========================================
-           ELEMENTS
-        ========================================= */
+        <!-- YEAR FILTER -->
 
-        const loginScreen =
-            document.getElementById("loginScreen");
+        <div id="yearSection">
 
-        const loginForm =
-            document.getElementById("loginForm");
+            <label for="yearSelect">
+                Year
+            </label>
 
-        const signupForm =
-            document.getElementById("signupForm");
+            <select id="yearSelect">
 
-        const mainContent =
-            document.getElementById("mainContent");
+                <option value="">
+                    Select Year
+                </option>
 
-        const logoutContainer =
-            document.getElementById("logoutContainer");
+            </select>
 
-        const loginMessage =
-            document.getElementById("loginMessage");
+        </div>
 
 
-        /* =========================================
-           TOPIC DATA
-        ========================================= */
+        <div class="button-row">
 
-        const paperITopics = [
+            <button
+                id="loadQuestions"
+                type="button"
+            >
+                Load Questions
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUESTIONS -->
+
+    <div
+        class="card"
+        id="questionsCard"
+        style="display:none;"
+    >
+
+        <h3>Select Questions</h3>
+
+        <div class="button-row">
+
+            <button
+                id="selectAll"
+                type="button"
+            >
+                Select All
+            </button>
+
+            <button
+                id="clearAll"
+                type="button"
+                class="secondary"
+            >
+                Clear All
+            </button>
+
+        </div>
+
+
+        <div
+            id="selectedCount"
+            class="selected-count"
+        >
+            Selected: 0
+        </div>
+
+        <div id="questionsList"></div>
+
+    </div>
+
+
+    <!-- GENERATE -->
+
+    <div
+        class="card"
+        id="generateCard"
+        style="display:none;"
+    >
+
+        <h3>Generate QCAB</h3>
+
+        <p>
+            Generate a PDF containing the selected questions
+            followed by answer-writing pages.
+        </p>
+
+        <button
+            id="generateQCAB"
+            type="button"
+        >
+            Generate QCAB PDF
+        </button>
+
+        <div style="margin-top:15px;">
+
+            <button
+                id="downloadQCAB"
+                type="button"
+                style="display:none;"
+            >
+                Download QCAB PDF
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- =========================
+     LIBRARIES
+========================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- =========================
+     SUPABASE + APP LOGIC
+========================== -->
+
+<script>
+
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
+
+const API_URL =
+    "https://govhlwqbobforvprdlps.supabase.co/functions/v1/get-questions";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_lr04EFZActHWsuFS9S24QQ_ryPJMYFM";
+
+const SUPABASE_URL =
+    "https://govhlwqbobforvprdlps.supabase.co";
+
+
+window.supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const loginScreen =
+    document.getElementById("loginScreen");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const signupForm =
+    document.getElementById("signupForm");
+
+const mainContent =
+    document.getElementById("mainContent");
+
+const logoutContainer =
+    document.getElementById("logoutContainer");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const planMessage =
+    document.getElementById("planMessage");
+
+
+/* =========================================
+   TOPIC DATA
+========================================= */
+
+const paperITopics = [
 
     "1.1 Meaning, Scope and development of Anthropology",
 
@@ -798,692 +830,872 @@
 ];
 
 
-        const paperIITopics = [
+const paperIITopics = [
 
-            "1.1 Evolution of Indian Culture and Civilization",
+    "1.1 Evolution of Indian Culture and Civilization",
 
-            "1.2 Palaeo-Anthropological evidences from India",
+    "1.2 Palaeo-Anthropological evidences from India",
 
-            "1.3 Ethno-archaeology in India",
+    "1.3 Ethno-archaeology in India",
 
-            "2. Demographic profile of India",
+    "2. Demographic profile of India",
 
-            "3.1 The structure and nature of traditional Indian Social System",
+    "3.1 The structure and nature of traditional Indian Social System",
 
-            "3.2 Caste system in India",
+    "3.2 Caste system in India",
 
-            "3.3 Sacred Complex & Nature-Man-Spirit Complex",
+    "3.3 Sacred Complex & Nature-Man-Spirit Complex",
 
-            "3.4 Impact of Buddhism, Jainism, Islam and Christianity on Indian society",
+    "3.4 Impact of Buddhism, Jainism, Islam and Christianity on Indian society",
 
-            "4. Emergence and growth of anthropology in India",
+    "4. Emergence and growth of anthropology in India",
 
-            "5.1 Indian Village",
+    "5.1 Indian Village",
 
-            "5.2 Linguistic and Religious minorities",
+    "5.2 Linguistic and Religious minorities",
 
-            "5.3 Indigenous and exogenous processes of socio-cultural change",
+    "5.3 Indigenous and exogenous processes of socio-cultural change",
 
-            "6.1 Tribal situation in India",
+    "6.1 Tribal situation in India",
 
-            "6.2 Problems of the tribal Communities",
+    "6.2 Problems of the tribal Communities",
 
-            "6.3 Developmental projects and their impact on tribal",
+    "6.3 Developmental projects and their impact on tribal",
 
-            "7.1 Problems of Exploitation and Deprivation of SCs, STs and OBCs",
+    "7.1 Problems of Exploitation and Deprivation of SCs, STs and OBCs",
 
-            "7.2 Social Change and Contemporary Tribal societies",
+    "7.2 Social Change and Contemporary Tribal societies",
 
-            "7.3 The Concept of Ethnicity",
+    "7.3 The Concept of Ethnicity",
 
-            "8.1 Impact of Hinduism, Buddhism, Christianity, Islam and other religions on tribal societies",
+    "8.1 Impact of Hinduism, Buddhism, Christianity, Islam and other religions on tribal societies",
 
-            "8.2 Tribe & Nation state-comparative study of tribal communities",
+    "8.2 Tribe & Nation state-comparative study of tribal communities",
 
-            "9.1 History of administration of tribal areas",
+    "9.1 History of administration of tribal areas",
 
-            "9.2 Role of Anthropology in Tribal and Rural Development",
+    "9.2 Role of Anthropology in Tribal and Rural Development",
 
-            "9.3 Contributions of Anthropology to the Understanding of Regionalism, Communalism, & Ethnic and Political Movements"
+    "9.3 Contributions of Anthropology to the Understanding of Regionalism, Communalism, & Ethnic and Political Movements"
 
-        ];
-
-
-        const years = [
-
-            2026,
-            2025,
-            2024,
-            2023,
-            2022,
-            2021,
-            2020,
-            2019,
-            2018,
-            2017,
-            2016
-
-        ];
+];
 
 
-        /* =========================================
-           AUTH UI
-        ========================================= */
+const years = [
+    2026,
+    2025,
+    2024,
+    2023,
+    2022,
+    2021,
+    2020,
+    2019,
+    2018,
+    2017,
+    2016
+];
 
-        async function updateAuthUI() {
 
-            const {
-                data: { session }
-            } =
-                await window.supabaseClient.auth.getSession();
+/* =========================================
+   UPDATE PLAN MESSAGE
+========================================= */
+
+function updatePlanMessage(accessLevel) {
+
+    if (accessLevel === "free") {
+
+        planMessage.textContent =
+            "Free Plan: You have access to 2026 questions only.";
+
+        planMessage.style.display = "block";
+
+    } else if (accessLevel === "paid") {
+
+        planMessage.textContent =
+            "Paid Plan: You have access to questions from all available years.";
+
+        planMessage.style.display = "block";
+
+    } else if (accessLevel === "admin") {
+
+        planMessage.textContent =
+            "Admin Access: You have full access to all available questions.";
+
+        planMessage.style.display = "block";
+
+    } else {
+
+        planMessage.style.display = "none";
+
+    }
+
+}
 
 
-            if (session) {
+/* =========================================
+   CHECK USER ACCESS LEVEL
+========================================= */
 
-                loginScreen.style.display = "none";
+async function checkUserAccess() {
 
-                mainContent.style.display = "block";
+    const {
+        data: { session }
+    } =
+        await window.supabaseClient.auth.getSession();
 
-                logoutContainer.style.display = "block";
+    if (!session) {
+        return;
+    }
 
-            } else {
+    try {
 
-                loginScreen.style.display = "block";
+        /*
+         * We use a valid 2026 request only to retrieve
+         * the user's access level.
+         *
+         * The returned questions are not displayed.
+         */
 
-                mainContent.style.display = "none";
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
 
-                logoutContainer.style.display = "none";
+                    headers: {
+                        "Content-Type": "application/json",
 
-                window.generatedPDF = null;
+                        "apikey":
+                            SUPABASE_PUBLISHABLE_KEY,
 
-                const downloadButton =
-                    document.getElementById("downloadQCAB");
+                        "Authorization":
+                            "Bearer " +
+                            session.access_token
+                    },
 
-                if (downloadButton) {
-                    downloadButton.style.display = "none";
+                    body:
+                        JSON.stringify({
+                            paper: "Paper I",
+                            year: 2026
+                        })
                 }
+            );
 
-            }
+
+        const result =
+            await response.json();
+
+
+        if (result.access_level) {
+
+            updatePlanMessage(
+                result.access_level
+            );
 
         }
 
+    } catch (error) {
 
-        /* =========================================
-           LOGIN
-        ========================================= */
+        console.error(
+            "Unable to check access level:",
+            error
+        );
 
-        document
-            .getElementById("loginButton")
-            .addEventListener("click", async function () {
+    }
 
-                const email =
-                    document
-                        .getElementById("loginEmail")
-                        .value
-                        .trim();
-
-                const password =
-                    document
-                        .getElementById("loginPassword")
-                        .value;
+}
 
 
-                if (!email || !password) {
+/* =========================================
+   AUTH UI
+========================================= */
 
-                    loginMessage.textContent =
-                        "Please enter your email and password.";
+async function updateAuthUI() {
 
-                    return;
+    const {
+        data: { session }
+    } =
+        await window.supabaseClient.auth.getSession();
 
-                }
 
+    if (session) {
+
+        loginScreen.style.display = "none";
+
+        mainContent.style.display = "block";
+
+        logoutContainer.style.display = "block";
+
+        /*
+         * Check and display user's plan
+         * immediately after login.
+         */
+
+        await checkUserAccess();
+
+    } else {
+
+        loginScreen.style.display = "block";
+
+        mainContent.style.display = "none";
+
+        logoutContainer.style.display = "none";
+
+        planMessage.style.display = "none";
+
+        window.generatedPDF = null;
+
+        const downloadButton =
+            document.getElementById("downloadQCAB");
+
+        if (downloadButton) {
+
+            downloadButton.style.display = "none";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+document
+    .getElementById("loginButton")
+    .addEventListener(
+        "click",
+        async function () {
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+
+            if (!email || !password) {
 
                 loginMessage.textContent =
-                    "Logging in...";
+                    "Please enter your email and password.";
+
+                return;
+
+            }
 
 
-                const {
-                    data,
-                    error
-                } =
-                    await window.supabaseClient.auth.signInWithPassword({
-
-                        email: email,
-                        password: password
-
-                    });
+            loginMessage.textContent =
+                "Logging in...";
 
 
-                if (error) {
+            const {
+                data,
+                error
+            } =
+                await window.supabaseClient.auth.signInWithPassword({
 
-                    console.error(error);
+                    email: email,
 
-                    loginMessage.textContent =
-                        error.message;
+                    password: password
 
-                    return;
+                });
 
-                }
 
+            if (error) {
+
+                console.error(error);
+
+                loginMessage.textContent =
+                    error.message;
+
+                return;
+
+            }
+
+
+            loginMessage.textContent = "";
+
+            await updateAuthUI();
+
+        });
+
+
+/* =========================================
+   SHOW SIGNUP
+========================================= */
+
+document
+    .getElementById("showSignupButton")
+    .addEventListener(
+        "click",
+        function () {
+
+            loginForm.classList.add("hidden");
+
+            signupForm.classList.remove("hidden");
+
+            loginMessage.textContent = "";
+
+        });
+
+
+/* =========================================
+   BACK TO LOGIN
+========================================= */
+
+document
+    .getElementById("backToLoginButton")
+    .addEventListener(
+        "click",
+        function () {
+
+            signupForm.classList.add("hidden");
+
+            loginForm.classList.remove("hidden");
+
+            loginMessage.textContent = "";
+
+        });
+
+
+/* =========================================
+   SIGN UP
+========================================= */
+
+document
+    .getElementById("signupButton")
+    .addEventListener(
+        "click",
+        async function () {
+
+            const email =
+                document
+                    .getElementById("signupEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("signupPassword")
+                    .value;
+
+
+            if (!email || !password) {
+
+                loginMessage.textContent =
+                    "Please enter your email and password.";
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                loginMessage.textContent =
+                    "Password must be at least 6 characters.";
+
+                return;
+
+            }
+
+
+            loginMessage.textContent =
+                "Creating your account...";
+
+
+            const {
+                data,
+                error
+            } =
+                await window.supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+
+                        emailRedirectTo:
+                            "https://sankalpkgaidhani-art.github.io/anthropology_qcab/confirmed.html"
+
+                    }
+
+                });
+
+
+            if (error) {
+
+                console.error(error);
+
+                loginMessage.textContent =
+                    error.message;
+
+                return;
+
+            }
+
+
+            if (data.session) {
 
                 loginMessage.textContent = "";
 
                 await updateAuthUI();
 
-            });
-
-
-        /* =========================================
-           SHOW SIGNUP
-        ========================================= */
-
-        document
-            .getElementById("showSignupButton")
-            .addEventListener("click", function () {
-
-                loginForm.classList.add("hidden");
-
-                signupForm.classList.remove("hidden");
-
-                loginMessage.textContent = "";
-
-            });
-
-
-        /* =========================================
-           BACK TO LOGIN
-        ========================================= */
-
-        document
-            .getElementById("backToLoginButton")
-            .addEventListener("click", function () {
-
-                signupForm.classList.add("hidden");
-
-                loginForm.classList.remove("hidden");
-
-                loginMessage.textContent = "";
-
-            });
-
-
-        /* =========================================
-           SIGN UP
-        ========================================= */
-
-        document
-            .getElementById("signupButton")
-            .addEventListener("click", async function () {
-
-                const email =
-                    document
-                        .getElementById("signupEmail")
-                        .value
-                        .trim();
-
-                const password =
-                    document
-                        .getElementById("signupPassword")
-                        .value;
-
-
-                if (!email || !password) {
-
-                    loginMessage.textContent =
-                        "Please enter your email and password.";
-
-                    return;
-
-                }
-
-
-                if (password.length < 6) {
-
-                    loginMessage.textContent =
-                        "Password must be at least 6 characters.";
-
-                    return;
-
-                }
-
-
-                loginMessage.textContent =
-                    "Creating your account...";
-
-
-                const {
-                    data,
-                    error
-                } =
-                    await window.supabaseClient.auth.signUp({
-
-    email: email,
-
-    password: password,
-
-    options: {
-
-        emailRedirectTo:
-            "https://sankalpkgaidhani-art.github.io/anthropology_qcab/confirmed.html"
-
-    }
-
-});
-
-
-                if (error) {
-
-                    console.error(error);
-
-                    loginMessage.textContent =
-                        error.message;
-
-                    return;
-
-                }
-
-
-                /*
-                 * If email confirmation is enabled in Supabase,
-                 * the user must confirm their email before login.
-                 */
-
-                if (data.session) {
-
-                    loginMessage.textContent = "";
-
-                    await updateAuthUI();
-
-                } else {
-
-                    loginMessage.className =
-                        "success-message";
-
-                    loginMessage.textContent =
-                        "Account created. Please check your email to confirm your account, then login.";
-
-                }
-
-            });
-
-
-        /* =========================================
-           FORGOT PASSWORD
-        ========================================= */
-
-        document
-            .getElementById("forgotPasswordButton")
-            .addEventListener("click", async function () {
-
-                const email =
-                    document
-                        .getElementById("loginEmail")
-                        .value
-                        .trim();
-
-
-                if (!email) {
-
-                    loginMessage.textContent =
-                        "Enter your email first, then click Forgot password.";
-
-                    return;
-
-                }
-
-
-                loginMessage.textContent =
-                    "Sending password reset email...";
-
-
-                const {
-                    error
-                } =
-                    await window.supabaseClient.auth.resetPasswordForEmail(
-
-                        email,
-
-                        {
-                            redirectTo:
-                                window.location.origin +
-                                window.location.pathname
-                        }
-
-                    );
-
-
-                if (error) {
-
-                    console.error(error);
-
-                    loginMessage.textContent =
-                        error.message;
-
-                    return;
-
-                }
-
+            } else {
 
                 loginMessage.className =
                     "success-message";
 
                 loginMessage.textContent =
-                    "Password reset email sent. Please check your inbox.";
-
-            });
-
-
-        /* =========================================
-           LOGOUT
-        ========================================= */
-
-        document
-            .getElementById("logoutButton")
-            .addEventListener("click", async function () {
-
-                const {
-                    error
-                } =
-                    await window.supabaseClient.auth.signOut();
-
-
-                if (error) {
-
-                    console.error(error);
-
-                    alert(
-                        "Unable to logout. Please try again."
-                    );
-
-                    return;
-
-                }
-
-
-                await updateAuthUI();
-
-            });
-
-
-        /* =========================================
-           AUTH STATE LISTENER
-        ========================================= */
-
-        window.supabaseClient.auth.onAuthStateChange(
-            async function (event, session) {
-
-                await updateAuthUI();
+                    "Account created. Please check your email to confirm your account, then login.";
 
             }
-        );
-
-
-        /* =========================================
-           INITIAL SESSION CHECK
-        ========================================= */
-
-        updateAuthUI();
-
-
-        /* =========================================
-           MODE
-        ========================================= */
-
-        let currentMode = "topic";
-
-
-        const topicModeButton =
-            document.getElementById("topicModeButton");
-
-        const yearModeButton =
-            document.getElementById("yearModeButton");
-
-        const topicSection =
-            document.getElementById("topicSection");
-
-        const yearSection =
-            document.getElementById("yearSection");
-
-
-        topicSection.style.display = "block";
-
-        yearSection.style.display = "none";
-
-
-        topicModeButton
-            .addEventListener("click", function () {
-
-                currentMode = "topic";
-
-                topicModeButton.classList.add("active");
-
-                yearModeButton.classList.remove("active");
-
-                topicSection.style.display = "block";
-
-                yearSection.style.display = "none";
-
-            });
-
-
-        yearModeButton
-            .addEventListener("click", function () {
-
-                currentMode = "year";
-
-                yearModeButton.classList.add("active");
-
-                topicModeButton.classList.remove("active");
-
-                topicSection.style.display = "none";
-
-                yearSection.style.display = "block";
-
-            });
-
-
-        /* =========================================
-           PAPER CHANGE
-        ========================================= */
-
-        document
-            .getElementById("paperSelect")
-            .addEventListener("change", function () {
-
-                const paper =
-                    this.value;
-
-                const topicSelect =
-                    document.getElementById("topicSelect");
-
-                topicSelect.innerHTML =
-                    '<option value="">Select Topic</option>';
-
-
-                if (paper === "Paper I") {
-
-                    paperITopics.forEach(function (topic) {
-
-                        const option =
-                            document.createElement("option");
-
-                        option.value = topic;
-
-                        option.textContent = topic;
-
-                        topicSelect.appendChild(option);
-
-                    });
-
-                }
-
-
-                if (paper === "Paper II") {
-
-                    paperIITopics.forEach(function (topic) {
-
-                        const option =
-                            document.createElement("option");
-
-                        option.value = topic;
-
-                        option.textContent = topic;
-
-                        topicSelect.appendChild(option);
-
-                    });
-
-                }
-
-            });
-
-
-        /* =========================================
-           YEAR DROPDOWN
-        ========================================= */
-
-        const yearSelect =
-            document.getElementById("yearSelect");
-
-
-        years.forEach(function (year) {
-
-            const option =
-                document.createElement("option");
-
-            option.value = year;
-
-            option.textContent = year;
-
-            yearSelect.appendChild(option);
 
         });
 
 
-        /* =========================================
-           FETCH QUESTIONS
-        ========================================= */
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
 
-        async function fetchQuestions(filters) {
+document
+    .getElementById("forgotPasswordButton")
+    .addEventListener(
+        "click",
+        async function () {
 
-            if (!window.supabaseClient) {
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
 
-                alert(
-                    "Supabase client not loaded."
-                );
 
-                return [];
+            if (!email) {
+
+                loginMessage.textContent =
+                    "Enter your email first, then click Forgot password.";
+
+                return;
 
             }
+
+
+            loginMessage.textContent =
+                "Sending password reset email...";
 
 
             const {
-                data: { session }
+                error
             } =
-                await window.supabaseClient.auth.getSession();
+                await window.supabaseClient.auth.resetPasswordForEmail(
 
+                    email,
 
-            if (!session) {
+                    {
 
-                alert(
-                    "Please login first."
+                        redirectTo:
+                            window.location.origin +
+                            window.location.pathname
+
+                    }
+
                 );
 
-                await updateAuthUI();
 
-                return [];
+            if (error) {
 
-            }
+                console.error(error);
 
+                loginMessage.textContent =
+                    error.message;
 
-            try {
-
-                const response =
-                    await fetch(
-
-                        API_URL,
-
-                        {
-
-                            method: "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "apikey":
-                                    SUPABASE_PUBLISHABLE_KEY,
-
-                                "Authorization":
-                                    "Bearer " +
-                                    session.access_token
-
-                            },
-
-                            body:
-                                JSON.stringify(filters)
-
-                        }
-
-                    );
-
-
-                const result =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    console.error(result);
-
-                    alert(
-                        result.error ||
-                        "Unable to load questions."
-                    );
-
-                    return [];
-
-                }
-
-
-                return result.questions || [];
+                return;
 
             }
 
-            catch (error) {
+
+            loginMessage.className =
+                "success-message";
+
+            loginMessage.textContent =
+                "Password reset email sent. Please check your inbox.";
+
+        });
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        async function () {
+
+            const {
+                error
+            } =
+                await window.supabaseClient.auth.signOut();
+
+
+            if (error) {
 
                 console.error(error);
 
                 alert(
-                    "Unable to connect to the server."
+                    "Unable to logout. Please try again."
                 );
 
-                return [];
+                return;
 
             }
+
+
+            await updateAuthUI();
+
+        });
+
+
+/* =========================================
+   AUTH STATE LISTENER
+========================================= */
+
+window.supabaseClient.auth.onAuthStateChange(
+
+    async function (event, session) {
+
+        await updateAuthUI();
+
+    }
+
+);
+
+
+/* =========================================
+   INITIAL SESSION CHECK
+========================================= */
+
+updateAuthUI();
+
+
+/* =========================================
+   MODE
+========================================= */
+
+let currentMode = "topic";
+
+
+const topicModeButton =
+    document.getElementById("topicModeButton");
+
+const yearModeButton =
+    document.getElementById("yearModeButton");
+
+const topicSection =
+    document.getElementById("topicSection");
+
+const yearSection =
+    document.getElementById("yearSection");
+
+
+topicSection.style.display = "block";
+
+yearSection.style.display = "none";
+
+
+topicModeButton
+    .addEventListener(
+        "click",
+        function () {
+
+            currentMode = "topic";
+
+            topicModeButton.classList.add("active");
+
+            yearModeButton.classList.remove("active");
+
+            topicSection.style.display = "block";
+
+            yearSection.style.display = "none";
+
+        });
+
+
+yearModeButton
+    .addEventListener(
+        "click",
+        function () {
+
+            currentMode = "year";
+
+            yearModeButton.classList.add("active");
+
+            topicModeButton.classList.remove("active");
+
+            topicSection.style.display = "none";
+
+            yearSection.style.display = "block";
+
+        });
+
+
+/* =========================================
+   PAPER CHANGE
+========================================= */
+
+document
+    .getElementById("paperSelect")
+    .addEventListener(
+        "change",
+        function () {
+
+            const paper =
+                this.value;
+
+            const topicSelect =
+                document.getElementById("topicSelect");
+
+
+            topicSelect.innerHTML =
+                '<option value="">Select Topic</option>';
+
+
+            if (paper === "Paper I") {
+
+                paperITopics.forEach(
+                    function (topic) {
+
+                        const option =
+                            document.createElement("option");
+
+                        option.value = topic;
+
+                        option.textContent = topic;
+
+                        topicSelect.appendChild(option);
+
+                    });
+
+            }
+
+
+            if (paper === "Paper II") {
+
+                paperIITopics.forEach(
+                    function (topic) {
+
+                        const option =
+                            document.createElement("option");
+
+                        option.value = topic;
+
+                        option.textContent = topic;
+
+                        topicSelect.appendChild(option);
+
+                    });
+
+            }
+
+        });
+
+
+/* =========================================
+   YEAR DROPDOWN
+========================================= */
+
+const yearSelect =
+    document.getElementById("yearSelect");
+
+
+years.forEach(
+    function (year) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = year;
+
+        option.textContent = year;
+
+        yearSelect.appendChild(option);
+
+    });
+
+
+/* =========================================
+   FETCH QUESTIONS
+========================================= */
+
+async function fetchQuestions(filters) {
+
+    if (!window.supabaseClient) {
+
+        alert(
+            "Supabase client not loaded."
+        );
+
+        return [];
+
+    }
+
+
+    const {
+        data: { session }
+    } =
+        await window.supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+        alert(
+            "Please login first."
+        );
+
+        await updateAuthUI();
+
+        return [];
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                API_URL,
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_PUBLISHABLE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            session.access_token
+
+                    },
+
+                    body:
+                        JSON.stringify(filters)
+
+                }
+
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            console.error(result);
+
+            alert(
+                result.error ||
+                "Unable to load questions."
+            );
+
+            return [];
 
         }
 
 
         /* =========================================
-           LOAD QUESTIONS
+           UPDATE PLAN MESSAGE
         ========================================= */
 
-        document
-            .getElementById("loadQuestions")
-            .addEventListener("click", async function () {
+        if (result.access_level) {
 
-                const paper =
+            updatePlanMessage(
+                result.access_level
+            );
+
+        }
+
+
+        return result.questions || [];
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to the server."
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD QUESTIONS
+========================================= */
+
+document
+    .getElementById("loadQuestions")
+    .addEventListener(
+        "click",
+        async function () {
+
+            const paper =
+                document
+                    .getElementById("paperSelect")
+                    .value;
+
+
+            if (!paper) {
+
+                alert(
+                    "Please select Paper I or Paper II."
+                );
+
+                return;
+
+            }
+
+
+            let filters = {
+                paper: paper
+            };
+
+
+            if (currentMode === "topic") {
+
+                const topic =
                     document
-                        .getElementById("paperSelect")
+                        .getElementById("topicSelect")
                         .value;
 
 
-                if (!paper) {
+                if (!topic) {
 
                     alert(
-                        "Please select Paper I or Paper II."
+                        "Please select a topic."
                     );
 
                     return;
@@ -1491,75 +1703,50 @@
                 }
 
 
-                let filters = {
+                filters.topic = topic;
 
-                    paper: paper
-
-                };
+            }
 
 
-                if (currentMode === "topic") {
+            if (currentMode === "year") {
 
-                    const topic =
-                        document
-                            .getElementById("topicSelect")
-                            .value;
-
-
-                    if (!topic) {
-
-                        alert(
-                            "Please select a topic."
-                        );
-
-                        return;
-
-                    }
+                const year =
+                    document
+                        .getElementById("yearSelect")
+                        .value;
 
 
-                    filters.topic = topic;
+                if (!year) {
+
+                    alert(
+                        "Please select a year."
+                    );
+
+                    return;
 
                 }
 
 
-                if (currentMode === "year") {
+                filters.year =
+                    Number(year);
 
-                    const year =
-                        document
-                            .getElementById("yearSelect")
-                            .value;
+            }
 
 
-                    if (!year) {
-
-                        alert(
-                            "Please select a year."
-                        );
-
-                        return;
-
-                    }
+            const questions =
+                await fetchQuestions(filters);
 
 
-                    filters.year = Number(year);
+            displayQuestions(questions);
 
-                }
-
-
-                const questions =
-                    await fetchQuestions(filters);
+        });
 
 
-                displayQuestions(questions);
+/* =========================================
+   DISPLAY QUESTIONS
+========================================= */
 
-            });
-
-
-        /* =========================================
-           DISPLAY QUESTIONS
-        ========================================= */
-
-        function displayQuestions(questions) {
+function displayQuestions(questions) {
 
     const questionsCard =
         document.getElementById("questionsCard");
@@ -1569,6 +1756,7 @@
 
     const generateCard =
         document.getElementById("generateCard");
+
 
     questionsList.innerHTML = "";
 
@@ -1580,29 +1768,39 @@
     const totalQuestionsMessage =
         document.createElement("div");
 
+
     totalQuestionsMessage.style.margin =
         "15px 0";
+
 
     totalQuestionsMessage.style.padding =
         "10px 14px";
 
+
     totalQuestionsMessage.style.background =
         "#ede9fe";
+
 
     totalQuestionsMessage.style.border =
         "1px solid #ddd6fe";
 
+
     totalQuestionsMessage.style.borderRadius =
         "8px";
+
 
     totalQuestionsMessage.style.fontWeight =
         "600";
 
+
     totalQuestionsMessage.style.color =
         "#3730a3";
 
+
     totalQuestionsMessage.textContent =
-        "Total Questions Found: " + questions.length;
+        "Total Questions Found: " +
+        questions.length;
+
 
     questionsList.appendChild(
         totalQuestionsMessage
@@ -1617,25 +1815,32 @@
 
         questionsList.innerHTML = "";
 
+
         const noQuestionsMessage =
             document.createElement("p");
 
+
         noQuestionsMessage.textContent =
             "No questions found for this selection.";
+
 
         questionsList.appendChild(
             totalQuestionsMessage
         );
 
+
         questionsList.appendChild(
             noQuestionsMessage
         );
 
+
         questionsCard.style.display =
             "block";
 
+
         generateCard.style.display =
             "none";
+
 
         return;
 
@@ -1646,81 +1851,88 @@
        DISPLAY QUESTIONS
     ========================================= */
 
-    questions.forEach(function (question, index) {
+    questions.forEach(
+        function (question, index) {
 
-        const wrapper =
-            document.createElement("div");
-
-        wrapper.className =
-            "question";
+            const wrapper =
+                document.createElement("div");
 
 
-        const label =
-            document.createElement("label");
+            wrapper.className =
+                "question";
 
 
-        const checkbox =
-            document.createElement("input");
-
-        checkbox.type =
-            "checkbox";
-
-        checkbox.className =
-            "question-checkbox";
-
-        checkbox.dataset.question =
-            JSON.stringify(question);
+            const label =
+                document.createElement("label");
 
 
-        checkbox.addEventListener(
-            "change",
-            updateSelectedCount
-        );
+            const checkbox =
+                document.createElement("input");
 
 
-        const content =
-            document.createElement("div");
+            checkbox.type =
+                "checkbox";
 
 
-        const meta =
-            document.createElement("div");
-
-        meta.className =
-            "question-meta";
+            checkbox.className =
+                "question-checkbox";
 
 
-        meta.textContent =
-            `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
+            checkbox.dataset.question =
+                JSON.stringify(question);
 
 
-        const text =
-            document.createElement("div");
+            checkbox.addEventListener(
+                "change",
+                updateSelectedCount
+            );
 
 
-        text.textContent =
-            question.question_text || "";
+            const content =
+                document.createElement("div");
 
 
-        content.appendChild(meta);
-
-        content.appendChild(text);
-
-
-        label.appendChild(checkbox);
-
-        label.appendChild(content);
+            const meta =
+                document.createElement("div");
 
 
-        wrapper.appendChild(label);
+            meta.className =
+                "question-meta";
 
 
-        questionsList.appendChild(wrapper);
+            meta.textContent =
+                `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
 
-    });
+
+            const text =
+                document.createElement("div");
+
+
+            text.textContent =
+                question.question_text || "";
+
+
+            content.appendChild(meta);
+
+            content.appendChild(text);
+
+
+            label.appendChild(checkbox);
+
+            label.appendChild(content);
+
+
+            wrapper.appendChild(label);
+
+
+            questionsList.appendChild(wrapper);
+
+        });
 
 
     questionsCard.style.display =
         "block";
+
 
     generateCard.style.display =
         "block";
@@ -1731,17 +1943,22 @@
 }
 
 
-        /* =========================================
-           SELECT ALL
-        ========================================= */
+/* =========================================
+   SELECT ALL
+========================================= */
 
-        document
-            .getElementById("selectAll")
-            .addEventListener("click", function () {
+document
+    .getElementById("selectAll")
+    .addEventListener(
+        "click",
+        function () {
 
-                document
-                    .querySelectorAll(".question-checkbox")
-                    .forEach(function (checkbox) {
+            document
+                .querySelectorAll(
+                    ".question-checkbox"
+                )
+                .forEach(
+                    function (checkbox) {
 
                         checkbox.checked =
                             true;
@@ -1749,22 +1966,27 @@
                     });
 
 
-                updateSelectedCount();
+            updateSelectedCount();
 
-            });
+        });
 
 
-        /* =========================================
-           CLEAR ALL
-        ========================================= */
+/* =========================================
+   CLEAR ALL
+========================================= */
 
-        document
-            .getElementById("clearAll")
-            .addEventListener("click", function () {
+document
+    .getElementById("clearAll")
+    .addEventListener(
+        "click",
+        function () {
 
-                document
-                    .querySelectorAll(".question-checkbox")
-                    .forEach(function (checkbox) {
+            document
+                .querySelectorAll(
+                    ".question-checkbox"
+                )
+                .forEach(
+                    function (checkbox) {
 
                         checkbox.checked =
                             false;
@@ -1772,65 +1994,68 @@
                     });
 
 
-                updateSelectedCount();
+            updateSelectedCount();
 
-            });
-
-
-        /* =========================================
-           SELECTED COUNT
-        ========================================= */
-
-        function updateSelectedCount() {
-
-            const selected =
-                document
-                    .querySelectorAll(
-                        ".question-checkbox:checked"
-                    )
-                    .length;
+        });
 
 
-            document
-                .getElementById("selectedCount")
-                .textContent =
-                "Selected: " + selected;
+/* =========================================
+   SELECTED COUNT
+========================================= */
 
-        }
+function updateSelectedCount() {
 
-
-        /* =========================================
-           GET SELECTED QUESTIONS
-        ========================================= */
-
-        window.getSelectedQuestions =
-            function () {
-
-                return Array
-                    .from(
-                        document.querySelectorAll(
-                            ".question-checkbox:checked"
-                        )
-                    )
-                    .map(function (checkbox) {
-
-                        return JSON.parse(
-                            checkbox.dataset.question
-                        );
-
-                    });
-
-            };
+    const selected =
+        document
+            .querySelectorAll(
+                ".question-checkbox:checked"
+            )
+            .length;
 
 
-    </script>
+    document
+        .getElementById("selectedCount")
+        .textContent =
+        "Selected: " +
+        selected;
+
+}
 
 
-    <!-- =========================
-         PDF GENERATOR
-    ========================== -->
+/* =========================================
+   GET SELECTED QUESTIONS
+========================================= */
 
-    <script src="js/generatePDF.js"></script>
+window.getSelectedQuestions =
+    function () {
+
+        return Array
+            .from(
+                document.querySelectorAll(
+                    ".question-checkbox:checked"
+                )
+            )
+            .map(
+                function (checkbox) {
+
+                    return JSON.parse(
+                        checkbox.dataset.question
+                    );
+
+                }
+            );
+
+    };
+
+
+</script>
+
+<!-- =========================
+     PDF GENERATOR
+========================== -->
+
+<script src="js/generatePDF.js"></script>
 
 </body>
+
 </html>
