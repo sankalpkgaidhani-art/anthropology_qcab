@@ -5,6 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Anthropology QCAB Generator</title>
@@ -12,317 +13,555 @@
 <style>
 
 :root {
+
     --primary: #4f46e5;
+
     --primary-dark: #3730a3;
+
     --bg: #f5f3ff;
+
     --card: #ffffff;
+
     --text: #1e1b4b;
+
     --muted: #6b7280;
+
     --border: #ddd6fe;
+
     --success: #15803d;
+
     --danger: #dc2626;
+
 }
 
 * {
+
     box-sizing: border-box;
+
 }
 
 body {
+
     margin: 0;
+
     font-family: Arial, Helvetica, sans-serif;
+
     background:
+
         radial-gradient(circle at top left, #ede9fe 0%, transparent 35%),
+
         radial-gradient(circle at bottom right, #fef3c7 0%, transparent 30%),
+
         var(--bg);
+
     color: var(--text);
+
 }
 
 .container {
+
     max-width: 1000px;
+
     margin: 0 auto;
+
     padding: 30px 20px;
+
 }
 
 h1 {
+
     text-align: center;
+
     margin-bottom: 8px;
+
     color: #312e81;
+
     letter-spacing: -0.5px;
+
 }
 
 .subtitle {
+
     text-align: center;
+
     color: var(--muted);
+
     margin-bottom: 18px;
+
 }
 
 .plan-message {
+
     max-width: 850px;
+
     margin: 0 auto 30px;
+
     padding: 11px 16px;
+
     background: #ede9fe;
+
     border: 1px solid #ddd6fe;
+
     border-radius: 8px;
+
     text-align: center;
+
     color: #3730a3;
+
     font-size: 14px;
+
     font-weight: 600;
+
 }
 
 .card {
+
     background: var(--card);
+
     border: 1px solid var(--border);
+
     border-radius: 12px;
+
     padding: 24px;
+
     margin-bottom: 20px;
+
     box-shadow: 0 4px 14px rgba(79, 70, 229, 0.07);
+
 }
 
 .card h3 {
+
     color: #312e81;
+
 }
 
 label {
+
     display: block;
+
     font-weight: 600;
+
     margin-bottom: 7px;
+
     color: #37334f;
+
 }
 
 select,
+
 input {
+
     width: 100%;
+
     padding: 11px 12px;
+
     border: 1px solid var(--border);
+
     border-radius: 8px;
+
     font-size: 15px;
+
     margin-bottom: 16px;
+
     background: #fafaff;
+
     color: var(--text);
+
 }
 
 select:focus,
+
 input:focus {
+
     outline: none;
+
     border-color: var(--primary);
+
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+
 }
 
 button {
+
     border: none;
+
     border-radius: 8px;
+
     padding: 11px 18px;
+
     font-size: 15px;
+
     cursor: pointer;
+
     background: var(--primary);
+
     color: white;
+
     transition: background 0.15s ease, transform 0.15s ease;
+
 }
 
 button:hover {
+
     background: var(--primary-dark);
+
     transform: translateY(-1px);
+
 }
 
 button.secondary {
+
     background: #e5e7eb;
+
     color: #374151;
+
 }
 
 button.secondary:hover {
+
     background: #d1d5db;
+
 }
 
 button.danger {
+
     background: var(--danger);
+
 }
 
 button.danger:hover {
+
     background: #b91c1c;
+
 }
 
 .button-row {
+
     display: flex;
+
     gap: 10px;
+
     flex-wrap: wrap;
+
 }
 
 .mode-row {
+
     display: flex;
+
     gap: 16px;
+
     margin-bottom: 20px;
+
     flex-wrap: wrap;
+
 }
 
 .mode-button {
+
     flex: 1;
+
     min-width: 220px;
+
     padding: 18px 24px;
+
     font-size: 17px;
+
     font-weight: 600;
+
     border-radius: 10px;
+
     background: #e5e7eb;
+
     color: #374151;
+
 }
 
 .mode-button:hover {
+
     background: #d1d5db;
+
     transform: translateY(-2px);
+
 }
 
 .mode-button.active {
+
     background: var(--primary);
+
     color: white;
+
     box-shadow: 0 5px 14px rgba(79, 70, 229, 0.22);
+
 }
 
 .mode-button.active:hover {
+
     background: var(--primary-dark);
+
 }
 
 .question {
+
     border: 1px solid var(--border);
+
     border-radius: 8px;
+
     padding: 15px;
+
     margin-bottom: 10px;
+
     background: #fcfcff;
+
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
 }
 
 .question:hover {
+
     border-color: #a5b4fc;
+
     box-shadow: 0 3px 10px rgba(79, 70, 229, 0.07);
+
 }
 
 .question label {
+
     display: flex;
+
     gap: 10px;
+
     align-items: flex-start;
+
     font-weight: normal;
+
     cursor: pointer;
+
 }
 
 .question input[type="checkbox"] {
+
     width: auto;
+
     margin-top: 3px;
+
     margin-bottom: 0;
+
     accent-color: var(--primary);
+
 }
 
 .question-meta {
+
     font-size: 13px;
+
     color: #7c3aed;
+
     margin-bottom: 6px;
+
     font-weight: 600;
+
 }
 
 .selected-count {
+
     margin: 15px 0;
+
     font-weight: 600;
+
     color: #3730a3;
+
     background: #ede9fe;
+
     padding: 7px 12px;
+
     border-radius: 20px;
+
     display: inline-block;
+
 }
 
 #loginScreen {
+
     max-width: 430px;
+
     margin: 70px auto;
+
     background: white;
+
     border: 1px solid var(--border);
+
     border-radius: 12px;
+
     padding: 30px;
+
     box-shadow: 0 8px 25px rgba(79, 70, 229, 0.10);
+
 }
 
 #loginScreen h2 {
+
     text-align: center;
+
     margin-top: 0;
+
     margin-bottom: 25px;
+
     color: #312e81;
+
 }
 
 #loginMessage {
+
     text-align: center;
+
     margin-top: 15px;
+
     color: var(--danger);
+
     font-size: 14px;
+
 }
 
 .auth-links {
+
     text-align: center;
+
     margin-top: 18px;
+
 }
 
 .auth-links button {
+
     background: none;
+
     color: var(--primary);
+
     padding: 4px;
+
     font-size: 14px;
+
 }
 
 .auth-links button:hover {
+
     background: none;
+
     text-decoration: underline;
+
     transform: none;
+
 }
 
 #logoutContainer {
+
     max-width: 1000px;
+
     margin: 15px auto 0;
+
     padding: 0 20px;
+
     text-align: right;
+
 }
 
 #logoutButton {
+
     background: var(--danger);
+
 }
 
 #logoutButton:hover {
+
     background: #b91c1c;
+
 }
 
 .creator-credit {
+
     margin-top: 14px;
+
     font-size: 12px;
+
     color: #7c3aed;
+
     font-weight: 600;
+
     letter-spacing: 0.3px;
+
+}
+
+/* =========================
+   UPGRADE TO PREMIUM
+========================== */
+
+#upgradePremiumButton {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: max(20px, calc(50% - 480px));
+
 }
 
 .hidden {
+
     display: none !important;
+
 }
 
 .success-message {
+
     color: var(--success);
+
     text-align: center;
+
     margin-top: 15px;
+
 }
 
 @media (max-width: 600px) {
 
     .container {
+
         padding: 20px 12px;
+
     }
 
     .card {
+
         padding: 18px;
+
     }
 
     #loginScreen {
+
         margin: 30px 15px;
+
     }
 
     .mode-row {
+
         flex-direction: column;
+
     }
 
     .mode-button {
+
         width: 100%;
+
         min-width: 0;
+
         padding: 16px 20px;
+
+    }
+
+    #upgradePremiumButton {
+
+        left: 12px;
+
     }
 
 }
@@ -338,7 +577,6 @@ button.danger:hover {
 ========================== -->
 
 <div id="loginScreen">
-
 
 <h2>Anthropology QCAB</h2>
 
@@ -442,14 +680,29 @@ button.danger:hover {
 
 <p id="loginMessage"></p>
 
-
 </div>
+
+
+<!-- =========================
+     UPGRADE TO PREMIUM
+========================== -->
+
+<button
+    id="upgradePremiumButton"
+    type="button"
+    onclick="window.location.href='premium.html';"
+    style="display: none;"
+>
+    Upgrade to Premium
+</button>
+
 
 <!-- =========================
      LOGOUT
 ========================== -->
 
 <div id="logoutContainer" style="display: none;">
+
     <button id="logoutButton" type="button">
         Logout
     </button>
@@ -457,7 +710,9 @@ button.danger:hover {
     <div class="creator-credit">
         Made by Sankalp10_04
     </div>
+
 </div>
+
 
 <!-- =========================
      MAIN QCAB GENERATOR
@@ -467,7 +722,6 @@ button.danger:hover {
     id="mainContent"
     style="display: none;"
 >
-
 
 <div class="container">
 
@@ -677,8 +931,8 @@ button.danger:hover {
 
 </div>
 
-
 </div>
+
 
 <!-- =========================
      LIBRARIES
@@ -689,6 +943,7 @@ button.danger:hover {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <!-- =========================
      SUPABASE + APP LOGIC
@@ -741,6 +996,9 @@ const loginMessage =
 
 const planMessage =
     document.getElementById("planMessage");
+
+const upgradePremiumButton =
+    document.getElementById("upgradePremiumButton");
 
 
 /* =========================================
@@ -882,17 +1140,29 @@ const paperIITopics = [
 
 
 const years = [
+
     2026,
+
     2025,
+
     2024,
+
     2023,
+
     2022,
+
     2021,
+
     2020,
+
     2019,
+
     2018,
+
     2017,
+
     2016
+
 ];
 
 
@@ -909,12 +1179,18 @@ function updatePlanMessage(accessLevel) {
 
         planMessage.style.display = "block";
 
+        /* Show Upgrade button only for Free users */
+        upgradePremiumButton.style.display = "block";
+
     } else if (accessLevel === "paid") {
 
         planMessage.textContent =
             "Paid Plan: You have access to questions from all available years.";
 
         planMessage.style.display = "block";
+
+        /* Hide Upgrade button for Paid users */
+        upgradePremiumButton.style.display = "none";
 
     } else if (accessLevel === "admin") {
 
@@ -923,9 +1199,14 @@ function updatePlanMessage(accessLevel) {
 
         planMessage.style.display = "block";
 
+        /* Hide Upgrade button for Admin users */
+        upgradePremiumButton.style.display = "none";
+
     } else {
 
         planMessage.style.display = "none";
+
+        upgradePremiumButton.style.display = "none";
 
     }
 
@@ -939,13 +1220,20 @@ function updatePlanMessage(accessLevel) {
 async function checkUserAccess() {
 
     const {
+
         data: { session }
+
     } =
+
         await window.supabaseClient.auth.getSession();
 
+
     if (!session) {
+
         return;
+
     }
+
 
     try {
 
@@ -957,12 +1245,17 @@ async function checkUserAccess() {
          */
 
         const response =
+
             await fetch(
+
                 API_URL,
+
                 {
+
                     method: "POST",
 
                     headers: {
+
                         "Content-Type": "application/json",
 
                         "apikey":
@@ -971,25 +1264,35 @@ async function checkUserAccess() {
                         "Authorization":
                             "Bearer " +
                             session.access_token
+
                     },
 
                     body:
+
                         JSON.stringify({
+
                             paper: "Paper I",
+
                             year: 2026
+
                         })
+
                 }
+
             );
 
 
         const result =
+
             await response.json();
 
 
         if (result.access_level) {
 
             updatePlanMessage(
+
                 result.access_level
+
             );
 
         }
@@ -997,8 +1300,11 @@ async function checkUserAccess() {
     } catch (error) {
 
         console.error(
+
             "Unable to check access level:",
+
             error
+
         );
 
     }
@@ -1013,8 +1319,11 @@ async function checkUserAccess() {
 async function updateAuthUI() {
 
     const {
+
         data: { session }
+
     } =
+
         await window.supabaseClient.auth.getSession();
 
 
@@ -1025,6 +1334,7 @@ async function updateAuthUI() {
         mainContent.style.display = "block";
 
         logoutContainer.style.display = "block";
+
 
         /*
          * Check and display user's plan
@@ -1043,10 +1353,15 @@ async function updateAuthUI() {
 
         planMessage.style.display = "none";
 
+        upgradePremiumButton.style.display = "none";
+
         window.generatedPDF = null;
 
+
         const downloadButton =
+
             document.getElementById("downloadQCAB");
+
 
         if (downloadButton) {
 
@@ -1064,26 +1379,39 @@ async function updateAuthUI() {
 ========================================= */
 
 document
+
     .getElementById("loginButton")
+
     .addEventListener(
+
         "click",
+
         async function () {
 
             const email =
+
                 document
+
                     .getElementById("loginEmail")
+
                     .value
+
                     .trim();
 
+
             const password =
+
                 document
+
                     .getElementById("loginPassword")
+
                     .value;
 
 
             if (!email || !password) {
 
                 loginMessage.textContent =
+
                     "Please enter your email and password.";
 
                 return;
@@ -1092,13 +1420,18 @@ document
 
 
             loginMessage.textContent =
+
                 "Logging in...";
 
 
             const {
+
                 data,
+
                 error
+
             } =
+
                 await window.supabaseClient.auth.signInWithPassword({
 
                     email: email,
@@ -1113,6 +1446,7 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
+
                     error.message;
 
                 return;
@@ -1132,9 +1466,13 @@ document
 ========================================= */
 
 document
+
     .getElementById("showSignupButton")
+
     .addEventListener(
+
         "click",
+
         function () {
 
             loginForm.classList.add("hidden");
@@ -1151,9 +1489,13 @@ document
 ========================================= */
 
 document
+
     .getElementById("backToLoginButton")
+
     .addEventListener(
+
         "click",
+
         function () {
 
             signupForm.classList.add("hidden");
@@ -1170,26 +1512,39 @@ document
 ========================================= */
 
 document
+
     .getElementById("signupButton")
+
     .addEventListener(
+
         "click",
+
         async function () {
 
             const email =
+
                 document
+
                     .getElementById("signupEmail")
+
                     .value
+
                     .trim();
 
+
             const password =
+
                 document
+
                     .getElementById("signupPassword")
+
                     .value;
 
 
             if (!email || !password) {
 
                 loginMessage.textContent =
+
                     "Please enter your email and password.";
 
                 return;
@@ -1200,6 +1555,7 @@ document
             if (password.length < 6) {
 
                 loginMessage.textContent =
+
                     "Password must be at least 6 characters.";
 
                 return;
@@ -1208,13 +1564,18 @@ document
 
 
             loginMessage.textContent =
+
                 "Creating your account...";
 
 
             const {
+
                 data,
+
                 error
+
             } =
+
                 await window.supabaseClient.auth.signUp({
 
                     email: email,
@@ -1224,6 +1585,7 @@ document
                     options: {
 
                         emailRedirectTo:
+
                             "https://sankalpkgaidhani-art.github.io/anthropology_qcab/confirmed.html"
 
                     }
@@ -1236,6 +1598,7 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
+
                     error.message;
 
                 return;
@@ -1252,9 +1615,11 @@ document
             } else {
 
                 loginMessage.className =
+
                     "success-message";
 
                 loginMessage.textContent =
+
                     "Account created. Please check your email to confirm your account, then login.";
 
             }
@@ -1267,21 +1632,30 @@ document
 ========================================= */
 
 document
+
     .getElementById("forgotPasswordButton")
+
     .addEventListener(
+
         "click",
+
         async function () {
 
             const email =
+
                 document
+
                     .getElementById("loginEmail")
+
                     .value
+
                     .trim();
 
 
             if (!email) {
 
                 loginMessage.textContent =
+
                     "Enter your email first, then click Forgot password.";
 
                 return;
@@ -1290,12 +1664,16 @@ document
 
 
             loginMessage.textContent =
+
                 "Sending password reset email...";
 
 
             const {
+
                 error
+
             } =
+
                 await window.supabaseClient.auth.resetPasswordForEmail(
 
                     email,
@@ -1303,7 +1681,9 @@ document
                     {
 
                         redirectTo:
+
                             window.location.origin +
+
                             window.location.pathname
 
                     }
@@ -1316,6 +1696,7 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
+
                     error.message;
 
                 return;
@@ -1324,9 +1705,11 @@ document
 
 
             loginMessage.className =
+
                 "success-message";
 
             loginMessage.textContent =
+
                 "Password reset email sent. Please check your inbox.";
 
         });
@@ -1337,14 +1720,21 @@ document
 ========================================= */
 
 document
+
     .getElementById("logoutButton")
+
     .addEventListener(
+
         "click",
+
         async function () {
 
             const {
+
                 error
+
             } =
+
                 await window.supabaseClient.auth.signOut();
 
 
@@ -1353,7 +1743,9 @@ document
                 console.error(error);
 
                 alert(
+
                     "Unable to logout. Please try again."
+
                 );
 
                 return;
@@ -1396,15 +1788,22 @@ let currentMode = "topic";
 
 
 const topicModeButton =
+
     document.getElementById("topicModeButton");
 
+
 const yearModeButton =
+
     document.getElementById("yearModeButton");
 
+
 const topicSection =
+
     document.getElementById("topicSection");
 
+
 const yearSection =
+
     document.getElementById("yearSection");
 
 
@@ -1414,8 +1813,11 @@ yearSection.style.display = "none";
 
 
 topicModeButton
+
     .addEventListener(
+
         "click",
+
         function () {
 
             currentMode = "topic";
@@ -1432,8 +1834,11 @@ topicModeButton
 
 
 yearModeButton
+
     .addEventListener(
+
         "click",
+
         function () {
 
             currentMode = "year";
@@ -1454,29 +1859,40 @@ yearModeButton
 ========================================= */
 
 document
+
     .getElementById("paperSelect")
+
     .addEventListener(
+
         "change",
+
         function () {
 
             const paper =
+
                 this.value;
 
+
             const topicSelect =
+
                 document.getElementById("topicSelect");
 
 
             topicSelect.innerHTML =
+
                 '<option value="">Select Topic</option>';
 
 
             if (paper === "Paper I") {
 
                 paperITopics.forEach(
+
                     function (topic) {
 
                         const option =
+
                             document.createElement("option");
+
 
                         option.value = topic;
 
@@ -1492,10 +1908,13 @@ document
             if (paper === "Paper II") {
 
                 paperIITopics.forEach(
+
                     function (topic) {
 
                         const option =
+
                             document.createElement("option");
+
 
                         option.value = topic;
 
@@ -1515,14 +1934,18 @@ document
 ========================================= */
 
 const yearSelect =
+
     document.getElementById("yearSelect");
 
 
 years.forEach(
+
     function (year) {
 
         const option =
+
             document.createElement("option");
+
 
         option.value = year;
 
@@ -1542,7 +1965,9 @@ async function fetchQuestions(filters) {
     if (!window.supabaseClient) {
 
         alert(
+
             "Supabase client not loaded."
+
         );
 
         return [];
@@ -1551,15 +1976,20 @@ async function fetchQuestions(filters) {
 
 
     const {
+
         data: { session }
+
     } =
+
         await window.supabaseClient.auth.getSession();
 
 
     if (!session) {
 
         alert(
+
             "Please login first."
+
         );
 
         await updateAuthUI();
@@ -1572,6 +2002,7 @@ async function fetchQuestions(filters) {
     try {
 
         const response =
+
             await fetch(
 
                 API_URL,
@@ -1583,18 +2014,23 @@ async function fetchQuestions(filters) {
                     headers: {
 
                         "Content-Type":
+
                             "application/json",
 
                         "apikey":
+
                             SUPABASE_PUBLISHABLE_KEY,
 
                         "Authorization":
+
                             "Bearer " +
+
                             session.access_token
 
                     },
 
                     body:
+
                         JSON.stringify(filters)
 
                 }
@@ -1603,6 +2039,7 @@ async function fetchQuestions(filters) {
 
 
         const result =
+
             await response.json();
 
 
@@ -1611,8 +2048,11 @@ async function fetchQuestions(filters) {
             console.error(result);
 
             alert(
+
                 result.error ||
+
                 "Unable to load questions."
+
             );
 
             return [];
@@ -1627,7 +2067,9 @@ async function fetchQuestions(filters) {
         if (result.access_level) {
 
             updatePlanMessage(
+
                 result.access_level
+
             );
 
         }
@@ -1642,7 +2084,9 @@ async function fetchQuestions(filters) {
         console.error(error);
 
         alert(
+
             "Unable to connect to the server."
+
         );
 
         return [];
@@ -1657,21 +2101,30 @@ async function fetchQuestions(filters) {
 ========================================= */
 
 document
+
     .getElementById("loadQuestions")
+
     .addEventListener(
+
         "click",
+
         async function () {
 
             const paper =
+
                 document
+
                     .getElementById("paperSelect")
+
                     .value;
 
 
             if (!paper) {
 
                 alert(
+
                     "Please select Paper I or Paper II."
+
                 );
 
                 return;
@@ -1680,22 +2133,29 @@ document
 
 
             let filters = {
+
                 paper: paper
+
             };
 
 
             if (currentMode === "topic") {
 
                 const topic =
+
                     document
+
                         .getElementById("topicSelect")
+
                         .value;
 
 
                 if (!topic) {
 
                     alert(
+
                         "Please select a topic."
+
                     );
 
                     return;
@@ -1711,15 +2171,20 @@ document
             if (currentMode === "year") {
 
                 const year =
+
                     document
+
                         .getElementById("yearSelect")
+
                         .value;
 
 
                 if (!year) {
 
                     alert(
+
                         "Please select a year."
+
                     );
 
                     return;
@@ -1728,12 +2193,14 @@ document
 
 
                 filters.year =
+
                     Number(year);
 
             }
 
 
             const questions =
+
                 await fetchQuestions(filters);
 
 
@@ -1749,12 +2216,17 @@ document
 function displayQuestions(questions) {
 
     const questionsCard =
+
         document.getElementById("questionsCard");
 
+
     const questionsList =
+
         document.getElementById("questionsList");
 
+
     const generateCard =
+
         document.getElementById("generateCard");
 
 
@@ -1766,44 +2238,56 @@ function displayQuestions(questions) {
     ========================================= */
 
     const totalQuestionsMessage =
+
         document.createElement("div");
 
 
     totalQuestionsMessage.style.margin =
+
         "15px 0";
 
 
     totalQuestionsMessage.style.padding =
+
         "10px 14px";
 
 
     totalQuestionsMessage.style.background =
+
         "#ede9fe";
 
 
     totalQuestionsMessage.style.border =
+
         "1px solid #ddd6fe";
 
 
     totalQuestionsMessage.style.borderRadius =
+
         "8px";
 
 
     totalQuestionsMessage.style.fontWeight =
+
         "600";
 
 
     totalQuestionsMessage.style.color =
+
         "#3730a3";
 
 
     totalQuestionsMessage.textContent =
+
         "Total Questions Found: " +
+
         questions.length;
 
 
     questionsList.appendChild(
+
         totalQuestionsMessage
+
     );
 
 
@@ -1817,28 +2301,36 @@ function displayQuestions(questions) {
 
 
         const noQuestionsMessage =
+
             document.createElement("p");
 
 
         noQuestionsMessage.textContent =
+
             "No questions found for this selection.";
 
 
         questionsList.appendChild(
+
             totalQuestionsMessage
+
         );
 
 
         questionsList.appendChild(
+
             noQuestionsMessage
+
         );
 
 
         questionsCard.style.display =
+
             "block";
 
 
         generateCard.style.display =
+
             "none";
 
 
@@ -1852,63 +2344,80 @@ function displayQuestions(questions) {
     ========================================= */
 
     questions.forEach(
+
         function (question, index) {
 
             const wrapper =
+
                 document.createElement("div");
 
 
             wrapper.className =
+
                 "question";
 
 
             const label =
+
                 document.createElement("label");
 
 
             const checkbox =
+
                 document.createElement("input");
 
 
             checkbox.type =
+
                 "checkbox";
 
 
             checkbox.className =
+
                 "question-checkbox";
 
 
             checkbox.dataset.question =
+
                 JSON.stringify(question);
 
 
             checkbox.addEventListener(
+
                 "change",
+
                 updateSelectedCount
+
             );
 
 
             const content =
+
                 document.createElement("div");
 
 
             const meta =
+
                 document.createElement("div");
 
 
             meta.className =
+
                 "question-meta";
 
 
             meta.textContent =
+
                 `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
 
 
             const text =
+
                 document.createElement("div");
 
 
             text.textContent =
+
                 question.question_text || "";
 
 
@@ -1931,10 +2440,12 @@ function displayQuestions(questions) {
 
 
     questionsCard.style.display =
+
         "block";
 
 
     generateCard.style.display =
+
         "block";
 
 
@@ -1948,19 +2459,29 @@ function displayQuestions(questions) {
 ========================================= */
 
 document
+
     .getElementById("selectAll")
+
     .addEventListener(
+
         "click",
+
         function () {
 
             document
+
                 .querySelectorAll(
+
                     ".question-checkbox"
+
                 )
+
                 .forEach(
+
                     function (checkbox) {
 
                         checkbox.checked =
+
                             true;
 
                     });
@@ -1976,19 +2497,29 @@ document
 ========================================= */
 
 document
+
     .getElementById("clearAll")
+
     .addEventListener(
+
         "click",
+
         function () {
 
             document
+
                 .querySelectorAll(
+
                     ".question-checkbox"
+
                 )
+
                 .forEach(
+
                     function (checkbox) {
 
                         checkbox.checked =
+
                             false;
 
                     });
@@ -2006,17 +2537,26 @@ document
 function updateSelectedCount() {
 
     const selected =
+
         document
+
             .querySelectorAll(
+
                 ".question-checkbox:checked"
+
             )
+
             .length;
 
 
     document
+
         .getElementById("selectedCount")
+
         .textContent =
+
         "Selected: " +
+
         selected;
 
 }
@@ -2027,28 +2567,40 @@ function updateSelectedCount() {
 ========================================= */
 
 window.getSelectedQuestions =
+
     function () {
 
         return Array
+
             .from(
+
                 document.querySelectorAll(
+
                     ".question-checkbox:checked"
+
                 )
+
             )
+
             .map(
+
                 function (checkbox) {
 
                     return JSON.parse(
+
                         checkbox.dataset.question
+
                     );
 
                 }
+
             );
 
     };
 
 
 </script>
+
 
 <!-- =========================
      PDF GENERATOR
