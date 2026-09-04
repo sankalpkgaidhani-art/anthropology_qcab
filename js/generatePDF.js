@@ -69,8 +69,86 @@ document.getElementById("generateQCAB").addEventListener("click", async () => {
         return;
     }
 
-    // Keep current marks-based ordering
-    selectedQuestions.sort((a, b) => a.marks - b.marks);
+    // ==========================================
+    // CHECK FREE / PAID / ADMIN ACCESS
+    // ==========================================
+
+    let accessLevel = "free";
+
+    try {
+
+        const response = await fetch(
+            "https://govhlwqbobforvprdlps.supabase.co/functions/v1/get-questions",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+
+                    "apikey":
+                        "sb_publishable_lr04EFZActHWsuFS9S24QQ_ryPJMYFM",
+
+                    "Authorization":
+                        "Bearer " + session.access_token
+                },
+
+                body: JSON.stringify({
+                    paper: "Paper I",
+                    year: 2026
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (result.access_level) {
+            accessLevel = result.access_level;
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to check access level:",
+            error
+        );
+
+        alert(
+            "Unable to verify your plan. Please try again."
+        );
+
+        return;
+    }
+
+
+    // ==========================================
+    // FREE PLAN — ONLY 2026 CAN BE GENERATED
+    // ==========================================
+
+    if (accessLevel === "free") {
+
+        const containsNon2026Question =
+            selectedQuestions.some(
+                q => Number(q.year) !== 2026
+            );
+
+        if (containsNon2026Question) {
+
+            alert(
+                "Your selection contains questions from years other than 2026, which is not available in the current Free Plan. Please upgrade to Premium to generate a QCAB containing these questions."
+            );
+
+            return;
+        }
+    }
+
+
+    // ==========================================
+    // KEEP CURRENT MARKS-BASED ORDERING
+    // ==========================================
+
+    selectedQuestions.sort(
+        (a, b) => a.marks - b.marks
+    );
 
     selectedQuestions.forEach((q, i) => {
         q.question_number = i + 1;
