@@ -1554,118 +1554,174 @@
 
         function displayQuestions(questions) {
 
-            const questionsCard =
-                document.getElementById("questionsCard");
+    const questionsCard =
+        document.getElementById("questionsCard");
 
-            const questionsList =
-                document.getElementById("questionsList");
+    const questionsList =
+        document.getElementById("questionsList");
 
-            const generateCard =
-                document.getElementById("generateCard");
+    const generateCard =
+        document.getElementById("generateCard");
 
-
-            questionsList.innerHTML = "";
-
-
-            if (!questions.length) {
-
-                questionsList.innerHTML =
-                    "<p>No questions found for this selection.</p>";
-
-                questionsCard.style.display =
-                    "block";
-
-                generateCard.style.display =
-                    "none";
-
-                return;
-
-            }
+    questionsList.innerHTML = "";
 
 
-            questions.forEach(function (question, index) {
+    /* =========================================
+       TOTAL QUESTIONS FOUND
+    ========================================= */
 
-                const wrapper =
-                    document.createElement("div");
+    const totalQuestionsMessage =
+        document.createElement("div");
 
-                wrapper.className =
-                    "question";
+    totalQuestionsMessage.style.margin =
+        "15px 0";
 
+    totalQuestionsMessage.style.padding =
+        "10px 14px";
 
-                const label =
-                    document.createElement("label");
+    totalQuestionsMessage.style.background =
+        "#ede9fe";
 
+    totalQuestionsMessage.style.border =
+        "1px solid #ddd6fe";
 
-                const checkbox =
-                    document.createElement("input");
+    totalQuestionsMessage.style.borderRadius =
+        "8px";
 
-                checkbox.type =
-                    "checkbox";
+    totalQuestionsMessage.style.fontWeight =
+        "600";
 
-                checkbox.className =
-                    "question-checkbox";
+    totalQuestionsMessage.style.color =
+        "#3730a3";
 
-                checkbox.dataset.question =
-                    JSON.stringify(question);
+    totalQuestionsMessage.textContent =
+        "Total Questions Found: " + questions.length;
 
-
-                checkbox.addEventListener(
-                    "change",
-                    updateSelectedCount
-                );
-
-
-                const content =
-                    document.createElement("div");
-
-
-                const meta =
-                    document.createElement("div");
-
-                meta.className =
-                    "question-meta";
+    questionsList.appendChild(
+        totalQuestionsMessage
+    );
 
 
-                meta.textContent =
-                    `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
+    /* =========================================
+       NO QUESTIONS
+    ========================================= */
+
+    if (!questions.length) {
+
+        questionsList.innerHTML = "";
+
+        const noQuestionsMessage =
+            document.createElement("p");
+
+        noQuestionsMessage.textContent =
+            "No questions found for this selection.";
+
+        questionsList.appendChild(
+            totalQuestionsMessage
+        );
+
+        questionsList.appendChild(
+            noQuestionsMessage
+        );
+
+        questionsCard.style.display =
+            "block";
+
+        generateCard.style.display =
+            "none";
+
+        return;
+
+    }
 
 
-                const text =
-                    document.createElement("div");
+    /* =========================================
+       DISPLAY QUESTIONS
+    ========================================= */
+
+    questions.forEach(function (question, index) {
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "question";
 
 
-                text.textContent =
-                    question.question_text || "";
+        const label =
+            document.createElement("label");
 
 
-                content.appendChild(meta);
+        const checkbox =
+            document.createElement("input");
 
-                content.appendChild(text);
+        checkbox.type =
+            "checkbox";
 
+        checkbox.className =
+            "question-checkbox";
 
-                label.appendChild(checkbox);
-
-                label.appendChild(content);
-
-
-                wrapper.appendChild(label);
-
-
-                questionsList.appendChild(wrapper);
-
-            });
+        checkbox.dataset.question =
+            JSON.stringify(question);
 
 
-            questionsCard.style.display =
-                "block";
+        checkbox.addEventListener(
+            "change",
+            updateSelectedCount
+        );
 
-            generateCard.style.display =
-                "block";
+
+        const content =
+            document.createElement("div");
 
 
-            updateSelectedCount();
+        const meta =
+            document.createElement("div");
 
-        }
+        meta.className =
+            "question-meta";
+
+
+        meta.textContent =
+            `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
+
+
+        const text =
+            document.createElement("div");
+
+
+        text.textContent =
+            question.question_text || "";
+
+
+        content.appendChild(meta);
+
+        content.appendChild(text);
+
+
+        label.appendChild(checkbox);
+
+        label.appendChild(content);
+
+
+        wrapper.appendChild(label);
+
+
+        questionsList.appendChild(wrapper);
+
+    });
+
+
+    questionsCard.style.display =
+        "block";
+
+    generateCard.style.display =
+        "block";
+
+
+    updateSelectedCount();
+
+}
 
 
         /* =========================================
