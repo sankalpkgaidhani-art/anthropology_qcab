@@ -1057,11 +1057,18 @@
                 } =
                     await window.supabaseClient.auth.signUp({
 
-                        email: email,
+    email: email,
 
-                        password: password
+    password: password,
 
-                    });
+    options: {
+
+        emailRedirectTo:
+            "https://sankalpkgaidhani-art.github.io/anthropology_qcab/confirmed.html"
+
+    }
+
+});
 
 
                 if (error) {
