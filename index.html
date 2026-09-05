@@ -2216,21 +2216,25 @@ document
 function displayQuestions(questions) {
 
     const questionsCard =
-
         document.getElementById("questionsCard");
 
-
     const questionsList =
-
         document.getElementById("questionsList");
 
-
     const generateCard =
-
         document.getElementById("generateCard");
 
-
     questionsList.innerHTML = "";
+
+    /* =========================================
+       SORT QUESTIONS BY YEAR — NEWEST FIRST
+    ========================================= */
+
+    questions.sort(function (a, b) {
+
+        return Number(b.year || 0) - Number(a.year || 0);
+
+    });
 
 
     /* =========================================
