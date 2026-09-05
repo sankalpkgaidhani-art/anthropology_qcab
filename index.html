@@ -47,11 +47,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     background:
-
         radial-gradient(circle at top left, #ede9fe 0%, transparent 35%),
-
         radial-gradient(circle at bottom right, #fef3c7 0%, transparent 30%),
-
         var(--bg);
 
     color: var(--text);
@@ -522,6 +519,424 @@ button.danger:hover {
 
 }
 
+/* =========================
+   CUSTOM QUESTIONS
+========================== */
+
+.custom-question-panel {
+
+    width: 100%;
+
+}
+
+.custom-field {
+
+    margin-bottom: 18px;
+
+}
+
+.custom-field label {
+
+    margin-bottom: 7px;
+
+}
+
+.custom-fields-row {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+}
+
+.custom-fields-row input {
+
+    margin-bottom: 4px;
+
+}
+
+.custom-fields-row small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+.custom-rich-editor {
+
+    width: 100%;
+
+    min-height: 150px;
+
+    padding: 13px 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: #fafaff;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    outline: none;
+
+    overflow-wrap: anywhere;
+
+}
+
+.custom-rich-editor:focus {
+
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+
+}
+
+.custom-rich-editor:empty:before {
+
+    content: attr(data-placeholder);
+
+    color: #9ca3af;
+
+    pointer-events: none;
+
+}
+
+.custom-editor-toolbar {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+
+    flex-wrap: wrap;
+
+}
+
+.custom-toolbar-button {
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+
+    background: #e5e7eb;
+
+    color: #374151;
+
+}
+
+.custom-toolbar-button:hover {
+
+    background: #d1d5db;
+
+}
+
+.custom-toolbar-help {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+.custom-question-image {
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    margin: 8px 0;
+
+    border-radius: 5px;
+
+}
+
+.custom-error {
+
+    color: var(--danger);
+
+    font-size: 14px;
+
+    min-height: 20px;
+
+    margin-bottom: 8px;
+
+}
+
+.custom-form-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 25px;
+
+}
+
+.custom-primary-button {
+
+    background: var(--primary);
+
+}
+
+.custom-secondary-button {
+
+    background: #e5e7eb;
+
+    color: #374151;
+
+}
+
+.custom-question-list {
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 20px;
+
+}
+
+.custom-list-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+
+}
+
+.custom-list-header h3 {
+
+    margin: 0 0 4px;
+
+    color: #312e81;
+
+}
+
+.custom-list-header span {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+.custom-totals {
+
+    font-weight: 600;
+
+    color: #3730a3;
+
+    text-align: right;
+
+}
+
+.custom-question-card {
+
+    display: grid;
+
+    grid-template-columns: 55px 1fr auto;
+
+    gap: 14px;
+
+    align-items: start;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    background: #fcfcff;
+
+}
+
+.custom-question-number {
+
+    font-weight: 700;
+
+    color: #3730a3;
+
+    padding-top: 2px;
+
+}
+
+.custom-question-content {
+
+    min-width: 0;
+
+}
+
+.custom-question-preview {
+
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+
+}
+
+.custom-question-preview img {
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    margin: 8px 0;
+
+}
+
+.custom-question-meta {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+
+}
+
+.custom-question-meta span {
+
+    background: #ede9fe;
+
+    color: #3730a3;
+
+    border-radius: 14px;
+
+    padding: 4px 9px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+.custom-question-actions {
+
+    display: flex;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+
+}
+
+.custom-small-button {
+
+    padding: 7px 10px;
+
+    font-size: 12px;
+
+    min-width: 36px;
+
+}
+
+.custom-small-button:disabled {
+
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+.custom-delete-button {
+
+    background: var(--danger);
+
+}
+
+.custom-delete-button:hover {
+
+    background: #b91c1c;
+
+}
+
+.custom-empty-state {
+
+    border: 1px dashed var(--border);
+
+    border-radius: 8px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    background: #fafaff;
+
+}
+
+@media (max-width: 700px) {
+
+    .custom-fields-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+    .custom-question-card {
+
+        grid-template-columns: 45px 1fr;
+
+    }
+
+    .custom-question-actions {
+
+        grid-column: 2;
+
+        justify-content: flex-start;
+
+    }
+
+    .custom-list-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .custom-totals {
+
+        text-align: left;
+
+    }
+
+}
+
 @media (max-width: 600px) {
 
     .container {
@@ -693,7 +1108,9 @@ button.danger:hover {
     onclick="window.location.href='premium.html';"
     style="display: none;"
 >
+
     Upgrade to Premium
+
 </button>
 
 
@@ -767,6 +1184,14 @@ button.danger:hover {
                 Year-wise
             </button>
 
+            <button
+                id="customModeButton"
+                class="mode-button"
+                type="button"
+            >
+                Add Own Questions
+            </button>
+
         </div>
 
     </div>
@@ -774,7 +1199,10 @@ button.danger:hover {
 
     <!-- FILTERS -->
 
-    <div class="card">
+    <div
+        class="card"
+        id="filterCard"
+    >
 
         <h3>Choose Questions</h3>
 
@@ -893,6 +1321,185 @@ button.danger:hover {
     </div>
 
 
+    <!-- =========================
+         CUSTOM QUESTIONS
+    ========================== -->
+
+    <div
+        class="card"
+        id="customQuestionsCard"
+        style="display:none;"
+    >
+
+        <h3>Add Your Own Questions</h3>
+
+        <div class="custom-question-panel">
+
+            <form id="customQuestionForm" novalidate>
+
+                <div class="custom-field">
+
+                    <label for="customQuestionText">
+                        Question
+                    </label>
+
+                    <div
+                        class="custom-editor-toolbar"
+                        role="toolbar"
+                        aria-label="Question tools"
+                    >
+
+                        <button
+                            type="button"
+                            id="clearQuestionButton"
+                            class="custom-toolbar-button"
+                        >
+                            Clear
+                        </button>
+
+                        <span class="custom-toolbar-help">
+                            Type text or paste text and images directly into the question box.
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="customQuestionText"
+                        class="custom-rich-editor"
+                        contenteditable="true"
+                        role="textbox"
+                        aria-multiline="true"
+                        data-placeholder="Enter your question...type text or paste text and images directly into the question box."
+                    ></div>
+
+                </div>
+
+
+                <div class="custom-fields-row">
+
+                    <div class="custom-field">
+
+                        <label for="customMarks">
+                            Marks
+                        </label>
+
+                        <input
+                            id="customMarks"
+                            type="number"
+                            min="1"
+                            max="1000"
+                            step="1"
+                            value="10"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="custom-field">
+
+                        <label for="customPages">
+                            Answer Pages
+                        </label>
+
+                        <input
+                            id="customPages"
+                            type="number"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="2"
+                            required
+                        >
+
+                        <small>
+                            Exact answer space in the PDF.
+                        </small>
+
+                    </div>
+
+
+                    <div class="custom-field">
+
+                        <label for="customWordLimit">
+                            Word Limit <span>(optional)</span>
+                        </label>
+
+                        <input
+                            id="customWordLimit"
+                            type="number"
+                            min="1"
+                            max="10000"
+                            step="1"
+                            placeholder="e.g. 150"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="customQuestionError"
+                    class="custom-error"
+                    role="alert"
+                ></div>
+
+
+                <div class="custom-form-actions">
+
+                    <button
+                        type="submit"
+                        id="addCustomQuestion"
+                        class="custom-primary-button"
+                    >
+                        + Add Question
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelCustomEdit"
+                        class="custom-secondary-button"
+                        style="display:none;"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div class="custom-question-list">
+
+                <div class="custom-list-header">
+
+                    <div>
+
+                        <h3>Your Questions</h3>
+
+                        <span id="customQuestionCount">
+                            0 questions
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="customTotals"
+                        class="custom-totals"
+                    ></div>
+
+                </div>
+
+                <div id="customQuestionItems"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- GENERATE -->
 
     <div
@@ -903,7 +1510,7 @@ button.danger:hover {
 
         <h3>Generate QCAB</h3>
 
-        <p>
+        <p id="generateDescription">
             Generate a PDF containing the selected questions
             followed by answer-writing pages.
         </p>
@@ -1142,25 +1749,15 @@ const paperIITopics = [
 const years = [
 
     2026,
-
     2025,
-
     2024,
-
     2023,
-
     2022,
-
     2021,
-
     2020,
-
     2019,
-
     2018,
-
     2017,
-
     2016
 
 ];
@@ -1179,7 +1776,6 @@ function updatePlanMessage(accessLevel) {
 
         planMessage.style.display = "block";
 
-        /* Show Upgrade button only for Free users */
         upgradePremiumButton.style.display = "block";
 
     } else if (accessLevel === "paid") {
@@ -1189,7 +1785,6 @@ function updatePlanMessage(accessLevel) {
 
         planMessage.style.display = "block";
 
-        /* Hide Upgrade button for Paid users */
         upgradePremiumButton.style.display = "none";
 
     } else if (accessLevel === "admin") {
@@ -1199,7 +1794,6 @@ function updatePlanMessage(accessLevel) {
 
         planMessage.style.display = "block";
 
-        /* Hide Upgrade button for Admin users */
         upgradePremiumButton.style.display = "none";
 
     } else {
@@ -1220,43 +1814,28 @@ function updatePlanMessage(accessLevel) {
 async function checkUserAccess() {
 
     const {
-
         data: { session }
-
     } =
-
         await window.supabaseClient.auth.getSession();
 
 
     if (!session) {
-
         return;
-
     }
 
 
     try {
 
-        /*
-         * We use a valid 2026 request only to retrieve
-         * the user's access level.
-         *
-         * The returned questions are not displayed.
-         */
-
         const response =
-
             await fetch(
-
                 API_URL,
-
                 {
-
                     method: "POST",
 
                     headers: {
 
-                        "Content-Type": "application/json",
+                        "Content-Type":
+                            "application/json",
 
                         "apikey":
                             SUPABASE_PUBLISHABLE_KEY,
@@ -1268,7 +1847,6 @@ async function checkUserAccess() {
                     },
 
                     body:
-
                         JSON.stringify({
 
                             paper: "Paper I",
@@ -1278,21 +1856,17 @@ async function checkUserAccess() {
                         })
 
                 }
-
             );
 
 
         const result =
-
             await response.json();
 
 
         if (result.access_level) {
 
             updatePlanMessage(
-
                 result.access_level
-
             );
 
         }
@@ -1300,11 +1874,8 @@ async function checkUserAccess() {
     } catch (error) {
 
         console.error(
-
             "Unable to check access level:",
-
             error
-
         );
 
     }
@@ -1319,11 +1890,8 @@ async function checkUserAccess() {
 async function updateAuthUI() {
 
     const {
-
         data: { session }
-
     } =
-
         await window.supabaseClient.auth.getSession();
 
 
@@ -1335,11 +1903,6 @@ async function updateAuthUI() {
 
         logoutContainer.style.display = "block";
 
-
-        /*
-         * Check and display user's plan
-         * immediately after login.
-         */
 
         await checkUserAccess();
 
@@ -1359,7 +1922,6 @@ async function updateAuthUI() {
 
 
         const downloadButton =
-
             document.getElementById("downloadQCAB");
 
 
@@ -1379,39 +1941,27 @@ async function updateAuthUI() {
 ========================================= */
 
 document
-
     .getElementById("loginButton")
-
     .addEventListener(
-
         "click",
-
         async function () {
 
             const email =
-
                 document
-
                     .getElementById("loginEmail")
-
                     .value
-
                     .trim();
 
 
             const password =
-
                 document
-
                     .getElementById("loginPassword")
-
                     .value;
 
 
             if (!email || !password) {
 
                 loginMessage.textContent =
-
                     "Please enter your email and password.";
 
                 return;
@@ -1420,18 +1970,13 @@ document
 
 
             loginMessage.textContent =
-
                 "Logging in...";
 
 
             const {
-
                 data,
-
                 error
-
             } =
-
                 await window.supabaseClient.auth.signInWithPassword({
 
                     email: email,
@@ -1446,7 +1991,6 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
-
                     error.message;
 
                 return;
@@ -1458,7 +2002,8 @@ document
 
             await updateAuthUI();
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1466,13 +2011,9 @@ document
 ========================================= */
 
 document
-
     .getElementById("showSignupButton")
-
     .addEventListener(
-
         "click",
-
         function () {
 
             loginForm.classList.add("hidden");
@@ -1481,7 +2022,8 @@ document
 
             loginMessage.textContent = "";
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1489,13 +2031,9 @@ document
 ========================================= */
 
 document
-
     .getElementById("backToLoginButton")
-
     .addEventListener(
-
         "click",
-
         function () {
 
             signupForm.classList.add("hidden");
@@ -1504,7 +2042,8 @@ document
 
             loginMessage.textContent = "";
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1512,39 +2051,27 @@ document
 ========================================= */
 
 document
-
     .getElementById("signupButton")
-
     .addEventListener(
-
         "click",
-
         async function () {
 
             const email =
-
                 document
-
                     .getElementById("signupEmail")
-
                     .value
-
                     .trim();
 
 
             const password =
-
                 document
-
                     .getElementById("signupPassword")
-
                     .value;
 
 
             if (!email || !password) {
 
                 loginMessage.textContent =
-
                     "Please enter your email and password.";
 
                 return;
@@ -1555,7 +2082,6 @@ document
             if (password.length < 6) {
 
                 loginMessage.textContent =
-
                     "Password must be at least 6 characters.";
 
                 return;
@@ -1564,18 +2090,13 @@ document
 
 
             loginMessage.textContent =
-
                 "Creating your account...";
 
 
             const {
-
                 data,
-
                 error
-
             } =
-
                 await window.supabaseClient.auth.signUp({
 
                     email: email,
@@ -1585,7 +2106,6 @@ document
                     options: {
 
                         emailRedirectTo:
-
                             "https://sankalpkgaidhani-art.github.io/anthropology_qcab/confirmed.html"
 
                     }
@@ -1598,7 +2118,6 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
-
                     error.message;
 
                 return;
@@ -1615,16 +2134,15 @@ document
             } else {
 
                 loginMessage.className =
-
                     "success-message";
 
                 loginMessage.textContent =
-
                     "Account created. Please check your email to confirm your account, then login.";
 
             }
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1632,30 +2150,21 @@ document
 ========================================= */
 
 document
-
     .getElementById("forgotPasswordButton")
-
     .addEventListener(
-
         "click",
-
         async function () {
 
             const email =
-
                 document
-
                     .getElementById("loginEmail")
-
                     .value
-
                     .trim();
 
 
             if (!email) {
 
                 loginMessage.textContent =
-
                     "Enter your email first, then click Forgot password.";
 
                 return;
@@ -1664,16 +2173,12 @@ document
 
 
             loginMessage.textContent =
-
                 "Sending password reset email...";
 
 
             const {
-
                 error
-
             } =
-
                 await window.supabaseClient.auth.resetPasswordForEmail(
 
                     email,
@@ -1681,9 +2186,7 @@ document
                     {
 
                         redirectTo:
-
                             window.location.origin +
-
                             window.location.pathname
 
                     }
@@ -1696,7 +2199,6 @@ document
                 console.error(error);
 
                 loginMessage.textContent =
-
                     error.message;
 
                 return;
@@ -1705,14 +2207,13 @@ document
 
 
             loginMessage.className =
-
                 "success-message";
 
             loginMessage.textContent =
-
                 "Password reset email sent. Please check your inbox.";
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1720,21 +2221,14 @@ document
 ========================================= */
 
 document
-
     .getElementById("logoutButton")
-
     .addEventListener(
-
         "click",
-
         async function () {
 
             const {
-
                 error
-
             } =
-
                 await window.supabaseClient.auth.signOut();
 
 
@@ -1743,9 +2237,7 @@ document
                 console.error(error);
 
                 alert(
-
                     "Unable to logout. Please try again."
-
                 );
 
                 return;
@@ -1755,7 +2247,8 @@ document
 
             await updateAuthUI();
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1788,23 +2281,35 @@ let currentMode = "topic";
 
 
 const topicModeButton =
-
     document.getElementById("topicModeButton");
 
-
 const yearModeButton =
-
     document.getElementById("yearModeButton");
+
+const customModeButton =
+    document.getElementById("customModeButton");
 
 
 const topicSection =
-
     document.getElementById("topicSection");
 
-
 const yearSection =
-
     document.getElementById("yearSection");
+
+const filterCard =
+    document.getElementById("filterCard");
+
+const questionsCard =
+    document.getElementById("questionsCard");
+
+const customQuestionsCard =
+    document.getElementById("customQuestionsCard");
+
+const generateCard =
+    document.getElementById("generateCard");
+
+const generateDescription =
+    document.getElementById("generateDescription");
 
 
 topicSection.style.display = "block";
@@ -1812,46 +2317,120 @@ topicSection.style.display = "block";
 yearSection.style.display = "none";
 
 
+/* =========================================
+   NORMAL MODE UI
+========================================= */
+
+function showNormalMode() {
+
+    filterCard.style.display = "block";
+
+    questionsCard.style.display = "none";
+
+    customQuestionsCard.style.display = "none";
+
+    generateCard.style.display = "none";
+
+    topicModeButton.classList.toggle(
+        "active",
+        currentMode === "topic"
+    );
+
+    yearModeButton.classList.toggle(
+        "active",
+        currentMode === "year"
+    );
+
+    customModeButton.classList.remove("active");
+
+}
+
+
+/* =========================================
+   CUSTOM MODE UI
+========================================= */
+
+function showCustomMode() {
+
+    filterCard.style.display = "none";
+
+    questionsCard.style.display = "none";
+
+    customQuestionsCard.style.display = "block";
+
+    generateCard.style.display = "block";
+
+    generateDescription.textContent =
+        "Generate a PDF containing your custom questions followed by answer-writing pages.";
+
+    topicModeButton.classList.remove("active");
+
+    yearModeButton.classList.remove("active");
+
+    customModeButton.classList.add("active");
+
+    renderCustomQuestionList();
+
+}
+
+
+/* =========================================
+   TOPIC MODE
+========================================= */
+
 topicModeButton
-
     .addEventListener(
-
         "click",
-
         function () {
 
             currentMode = "topic";
-
-            topicModeButton.classList.add("active");
-
-            yearModeButton.classList.remove("active");
 
             topicSection.style.display = "block";
 
             yearSection.style.display = "none";
 
-        });
+            showNormalMode();
 
+        }
+    );
+
+
+/* =========================================
+   YEAR MODE
+========================================= */
 
 yearModeButton
-
     .addEventListener(
-
         "click",
-
         function () {
 
             currentMode = "year";
-
-            yearModeButton.classList.add("active");
-
-            topicModeButton.classList.remove("active");
 
             topicSection.style.display = "none";
 
             yearSection.style.display = "block";
 
-        });
+            showNormalMode();
+
+        }
+    );
+
+
+/* =========================================
+   CUSTOM MODE
+========================================= */
+
+customModeButton
+    .addEventListener(
+        "click",
+        function () {
+
+            currentMode = "custom";
+
+            showCustomMode();
+
+        }
+    );
 
 
 /* =========================================
@@ -1859,38 +2438,29 @@ yearModeButton
 ========================================= */
 
 document
-
     .getElementById("paperSelect")
-
     .addEventListener(
-
         "change",
-
         function () {
 
             const paper =
-
                 this.value;
 
 
             const topicSelect =
-
                 document.getElementById("topicSelect");
 
 
             topicSelect.innerHTML =
-
                 '<option value="">Select Topic</option>';
 
 
             if (paper === "Paper I") {
 
                 paperITopics.forEach(
-
                     function (topic) {
 
                         const option =
-
                             document.createElement("option");
 
 
@@ -1900,7 +2470,8 @@ document
 
                         topicSelect.appendChild(option);
 
-                    });
+                    }
+                );
 
             }
 
@@ -1908,11 +2479,9 @@ document
             if (paper === "Paper II") {
 
                 paperIITopics.forEach(
-
                     function (topic) {
 
                         const option =
-
                             document.createElement("option");
 
 
@@ -1922,11 +2491,13 @@ document
 
                         topicSelect.appendChild(option);
 
-                    });
+                    }
+                );
 
             }
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -1934,16 +2505,13 @@ document
 ========================================= */
 
 const yearSelect =
-
     document.getElementById("yearSelect");
 
 
 years.forEach(
-
     function (year) {
 
         const option =
-
             document.createElement("option");
 
 
@@ -1953,7 +2521,8 @@ years.forEach(
 
         yearSelect.appendChild(option);
 
-    });
+    }
+);
 
 
 /* =========================================
@@ -1965,9 +2534,7 @@ async function fetchQuestions(filters) {
     if (!window.supabaseClient) {
 
         alert(
-
             "Supabase client not loaded."
-
         );
 
         return [];
@@ -1976,20 +2543,15 @@ async function fetchQuestions(filters) {
 
 
     const {
-
         data: { session }
-
     } =
-
         await window.supabaseClient.auth.getSession();
 
 
     if (!session) {
 
         alert(
-
             "Please login first."
-
         );
 
         await updateAuthUI();
@@ -2002,11 +2564,8 @@ async function fetchQuestions(filters) {
     try {
 
         const response =
-
             await fetch(
-
                 API_URL,
-
                 {
 
                     method: "POST",
@@ -2014,32 +2573,25 @@ async function fetchQuestions(filters) {
                     headers: {
 
                         "Content-Type":
-
                             "application/json",
 
                         "apikey":
-
                             SUPABASE_PUBLISHABLE_KEY,
 
                         "Authorization":
-
                             "Bearer " +
-
                             session.access_token
 
                     },
 
                     body:
-
                         JSON.stringify(filters)
 
                 }
-
             );
 
 
         const result =
-
             await response.json();
 
 
@@ -2048,11 +2600,8 @@ async function fetchQuestions(filters) {
             console.error(result);
 
             alert(
-
                 result.error ||
-
                 "Unable to load questions."
-
             );
 
             return [];
@@ -2060,16 +2609,10 @@ async function fetchQuestions(filters) {
         }
 
 
-        /* =========================================
-           UPDATE PLAN MESSAGE
-        ========================================= */
-
         if (result.access_level) {
 
             updatePlanMessage(
-
                 result.access_level
-
             );
 
         }
@@ -2084,9 +2627,7 @@ async function fetchQuestions(filters) {
         console.error(error);
 
         alert(
-
             "Unable to connect to the server."
-
         );
 
         return [];
@@ -2101,30 +2642,21 @@ async function fetchQuestions(filters) {
 ========================================= */
 
 document
-
     .getElementById("loadQuestions")
-
     .addEventListener(
-
         "click",
-
         async function () {
 
             const paper =
-
                 document
-
                     .getElementById("paperSelect")
-
                     .value;
 
 
             if (!paper) {
 
                 alert(
-
                     "Please select Paper I or Paper II."
-
                 );
 
                 return;
@@ -2142,20 +2674,15 @@ document
             if (currentMode === "topic") {
 
                 const topic =
-
                     document
-
                         .getElementById("topicSelect")
-
                         .value;
 
 
                 if (!topic) {
 
                     alert(
-
                         "Please select a topic."
-
                     );
 
                     return;
@@ -2171,20 +2698,15 @@ document
             if (currentMode === "year") {
 
                 const year =
-
                     document
-
                         .getElementById("yearSelect")
-
                         .value;
 
 
                 if (!year) {
 
                     alert(
-
                         "Please select a year."
-
                     );
 
                     return;
@@ -2193,20 +2715,19 @@ document
 
 
                 filters.year =
-
                     Number(year);
 
             }
 
 
             const questions =
-
                 await fetchQuestions(filters);
 
 
             displayQuestions(questions);
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -2224,80 +2745,54 @@ function displayQuestions(questions) {
     const generateCard =
         document.getElementById("generateCard");
 
+
     questionsList.innerHTML = "";
 
-    /* =========================================
-       SORT QUESTIONS BY YEAR — NEWEST FIRST
-    ========================================= */
 
-    questions.sort(function (a, b) {
+    questions.sort(
+        function (a, b) {
 
-        return Number(b.year || 0) - Number(a.year || 0);
+            return Number(b.year || 0) -
+                   Number(a.year || 0);
 
-    });
+        }
+    );
 
-
-    /* =========================================
-       TOTAL QUESTIONS FOUND
-    ========================================= */
 
     const totalQuestionsMessage =
-
         document.createElement("div");
 
 
     totalQuestionsMessage.style.margin =
-
         "15px 0";
 
-
     totalQuestionsMessage.style.padding =
-
         "10px 14px";
 
-
     totalQuestionsMessage.style.background =
-
         "#ede9fe";
 
-
     totalQuestionsMessage.style.border =
-
         "1px solid #ddd6fe";
 
-
     totalQuestionsMessage.style.borderRadius =
-
         "8px";
 
-
     totalQuestionsMessage.style.fontWeight =
-
         "600";
 
-
     totalQuestionsMessage.style.color =
-
         "#3730a3";
 
-
     totalQuestionsMessage.textContent =
-
         "Total Questions Found: " +
-
         questions.length;
 
 
     questionsList.appendChild(
-
         totalQuestionsMessage
-
     );
 
-
-    /* =========================================
-       NO QUESTIONS
-    ========================================= */
 
     if (!questions.length) {
 
@@ -2305,36 +2800,26 @@ function displayQuestions(questions) {
 
 
         const noQuestionsMessage =
-
             document.createElement("p");
 
 
         noQuestionsMessage.textContent =
-
             "No questions found for this selection.";
 
 
         questionsList.appendChild(
-
             totalQuestionsMessage
-
         );
 
-
         questionsList.appendChild(
-
             noQuestionsMessage
-
         );
 
 
         questionsCard.style.display =
-
             "block";
 
-
         generateCard.style.display =
-
             "none";
 
 
@@ -2343,85 +2828,64 @@ function displayQuestions(questions) {
     }
 
 
-    /* =========================================
-       DISPLAY QUESTIONS
-    ========================================= */
-
     questions.forEach(
-
         function (question, index) {
 
             const wrapper =
-
                 document.createElement("div");
 
 
             wrapper.className =
-
                 "question";
 
 
             const label =
-
                 document.createElement("label");
 
 
             const checkbox =
-
                 document.createElement("input");
 
 
             checkbox.type =
-
                 "checkbox";
 
 
             checkbox.className =
-
                 "question-checkbox";
 
 
             checkbox.dataset.question =
-
                 JSON.stringify(question);
 
 
             checkbox.addEventListener(
-
                 "change",
-
                 updateSelectedCount
-
             );
 
 
             const content =
-
                 document.createElement("div");
 
 
             const meta =
-
                 document.createElement("div");
 
 
             meta.className =
-
                 "question-meta";
 
 
             meta.textContent =
-
                 `${question.year || ""} | ${question.marks || ""} Marks | ${question.word_limit || ""} Words`;
 
 
             const text =
-
                 document.createElement("div");
 
 
             text.textContent =
-
                 question.question_text || "";
 
 
@@ -2440,17 +2904,18 @@ function displayQuestions(questions) {
 
             questionsList.appendChild(wrapper);
 
-        });
+        }
+    );
 
 
     questionsCard.style.display =
-
         "block";
-
 
     generateCard.style.display =
-
         "block";
+
+    generateDescription.textContent =
+        "Generate a PDF containing the selected questions followed by answer-writing pages.";
 
 
     updateSelectedCount();
@@ -2463,37 +2928,29 @@ function displayQuestions(questions) {
 ========================================= */
 
 document
-
     .getElementById("selectAll")
-
     .addEventListener(
-
         "click",
-
         function () {
 
             document
-
                 .querySelectorAll(
-
                     ".question-checkbox"
-
                 )
-
                 .forEach(
-
                     function (checkbox) {
 
                         checkbox.checked =
-
                             true;
 
-                    });
+                    }
+                );
 
 
             updateSelectedCount();
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -2501,37 +2958,29 @@ document
 ========================================= */
 
 document
-
     .getElementById("clearAll")
-
     .addEventListener(
-
         "click",
-
         function () {
 
             document
-
                 .querySelectorAll(
-
                     ".question-checkbox"
-
                 )
-
                 .forEach(
-
                     function (checkbox) {
 
                         checkbox.checked =
-
                             false;
 
-                    });
+                    }
+                );
 
 
             updateSelectedCount();
 
-        });
+        }
+    );
 
 
 /* =========================================
@@ -2541,26 +2990,17 @@ document
 function updateSelectedCount() {
 
     const selected =
-
         document
-
             .querySelectorAll(
-
                 ".question-checkbox:checked"
-
             )
-
             .length;
 
 
     document
-
         .getElementById("selectedCount")
-
         .textContent =
-
         "Selected: " +
-
         selected;
 
 }
@@ -2571,37 +3011,1601 @@ function updateSelectedCount() {
 ========================================= */
 
 window.getSelectedQuestions =
-
     function () {
 
         return Array
-
             .from(
-
                 document.querySelectorAll(
-
                     ".question-checkbox:checked"
-
                 )
-
             )
-
             .map(
-
                 function (checkbox) {
 
                     return JSON.parse(
-
                         checkbox.dataset.question
-
                     );
 
                 }
-
             );
 
     };
 
+
+/* =====================================================
+   CUSTOM QUESTION HANDLER
+===================================================== */
+
+(function () {
+
+    "use strict";
+
+
+    let customQuestions = [];
+
+    let editingId = null;
+
+    let customIdCounter = 1;
+
+    let savedRange = null;
+
+
+    /* =========================================
+       CUSTOM MODE DETECTION
+    ========================================= */
+
+    window.isCustomQuestionMode =
+        function () {
+
+            return currentMode === "custom";
+
+        };
+
+
+    /* =========================================
+       GET CUSTOM QUESTIONS
+    ========================================= */
+
+    window.getCustomQuestions =
+        function () {
+
+            return customQuestions.map(
+                function (q) {
+
+                    return {
+                        ...q
+                    };
+
+                }
+            );
+
+        };
+
+
+    /* =========================================
+       SAVE EDITOR SELECTION
+    ========================================= */
+
+    function saveEditorSelection() {
+
+        const editor =
+            document.getElementById(
+                "customQuestionText"
+            );
+
+
+        if (!editor) return;
+
+
+        const selection =
+            window.getSelection();
+
+
+        if (!selection ||
+            selection.rangeCount === 0) {
+
+            return;
+
+        }
+
+
+        const range =
+            selection.getRangeAt(0);
+
+
+        if (
+            editor.contains(
+                range.commonAncestorContainer
+            )
+        ) {
+
+            savedRange =
+                range.cloneRange();
+
+        }
+
+    }
+
+
+    /* =========================================
+       RESTORE EDITOR SELECTION
+    ========================================= */
+
+    function restoreEditorSelection() {
+
+        const editor =
+            document.getElementById(
+                "customQuestionText"
+            );
+
+
+        if (!editor) return;
+
+
+        editor.focus();
+
+
+        const selection =
+            window.getSelection();
+
+
+        selection.removeAllRanges();
+
+
+        if (
+            savedRange &&
+            editor.contains(
+                savedRange.commonAncestorContainer
+            )
+        ) {
+
+            selection.addRange(
+                savedRange
+            );
+
+            return;
+
+        }
+
+
+        const range =
+            document.createRange();
+
+
+        range.selectNodeContents(
+            editor
+        );
+
+
+        range.collapse(false);
+
+
+        selection.addRange(
+            range
+        );
+
+    }
+
+
+    /* =========================================
+       PLACE CARET AFTER NODE
+    ========================================= */
+
+    function placeCaretAfter(node) {
+
+        const selection =
+            window.getSelection();
+
+
+        const range =
+            document.createRange();
+
+
+        range.setStartAfter(node);
+
+        range.collapse(true);
+
+
+        selection.removeAllRanges();
+
+        selection.addRange(range);
+
+
+        savedRange =
+            range.cloneRange();
+
+    }
+
+
+    /* =========================================
+       INSERT HTML AT CARET
+    ========================================= */
+
+    function insertHTMLAtCaret(html) {
+
+        restoreEditorSelection();
+
+
+        const selection =
+            window.getSelection();
+
+
+        if (
+            !selection ||
+            selection.rangeCount === 0
+        ) {
+
+            return;
+
+        }
+
+
+        const range =
+            selection.getRangeAt(0);
+
+
+        range.deleteContents();
+
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.innerHTML =
+            html;
+
+
+        const fragment =
+            document.createDocumentFragment();
+
+
+        let lastNode = null;
+
+
+        while (wrapper.firstChild) {
+
+            lastNode =
+                fragment.appendChild(
+                    wrapper.firstChild
+                );
+
+        }
+
+
+        range.insertNode(
+            fragment
+        );
+
+
+        if (lastNode) {
+
+            placeCaretAfter(
+                lastNode
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        return String(value || "")
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =========================================
+       INSERT TEXT AT CARET
+    ========================================= */
+
+    function insertTextAtCaret(text) {
+
+        if (!text) return;
+
+
+        insertHTMLAtCaret(
+            escapeHTML(text)
+                .replace(
+                    /\n/g,
+                    "<br>"
+                )
+        );
+
+    }
+
+
+    /* =========================================
+       SANITIZE QUESTION HTML
+    ========================================= */
+
+    function sanitizeQuestionHTML(html) {
+
+        const template =
+            document.createElement(
+                "template"
+            );
+
+
+        template.innerHTML =
+            html || "";
+
+
+        template.content
+            .querySelectorAll(
+                "script,style,iframe,object,embed,form,video,audio,link,meta"
+            )
+            .forEach(
+                function (el) {
+
+                    el.remove();
+
+                }
+            );
+
+
+        template.content
+            .querySelectorAll("*")
+            .forEach(
+                function (el) {
+
+                    [
+                        ...el.attributes
+                    ].forEach(
+                        function (attr) {
+
+                            const name =
+                                attr.name.toLowerCase();
+
+
+                            if (
+                                name.startsWith("on") ||
+                                name === "style" ||
+                                name === "id"
+                            ) {
+
+                                el.removeAttribute(
+                                    attr.name
+                                );
+
+                            }
+
+                        }
+                    );
+
+
+                    if (
+                        el.tagName === "IMG"
+                    ) {
+
+                        const src =
+                            el.getAttribute(
+                                "src"
+                            ) || "";
+
+
+                        if (
+                            !src.startsWith(
+                                "data:image/"
+                            )
+                        ) {
+
+                            el.remove();
+
+                        } else {
+
+                            el.setAttribute(
+                                "alt",
+                                el.getAttribute(
+                                    "alt"
+                                ) ||
+                                "Question image"
+                            );
+
+
+                            el.setAttribute(
+                                "draggable",
+                                "false"
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+        return template.innerHTML.trim();
+
+    }
+
+
+    /* =========================================
+       PLAIN TEXT FROM HTML
+    ========================================= */
+
+    function plainTextFromHTML(html) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.innerHTML =
+            html || "";
+
+
+        return (
+            div.textContent || ""
+        )
+            .replace(
+                /\u00a0/g,
+                " "
+            )
+            .trim();
+
+    }
+
+
+    /* =========================================
+       RESIZE IMAGE
+    ========================================= */
+
+    function resizeImage(
+        file,
+        callback
+    ) {
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function () {
+
+                const img =
+                    new Image();
+
+
+                img.onload =
+                    function () {
+
+                        const maxDimension =
+                            1400;
+
+
+                        const scale =
+                            Math.min(
+                                1,
+                                maxDimension /
+                                Math.max(
+                                    img.naturalWidth,
+                                    img.naturalHeight
+                                )
+                            );
+
+
+                        const width =
+                            Math.max(
+                                1,
+                                Math.round(
+                                    img.naturalWidth *
+                                    scale
+                                )
+                            );
+
+
+                        const height =
+                            Math.max(
+                                1,
+                                Math.round(
+                                    img.naturalHeight *
+                                    scale
+                                )
+                            );
+
+
+                        const canvas =
+                            document.createElement(
+                                "canvas"
+                            );
+
+
+                        canvas.width =
+                            width;
+
+                        canvas.height =
+                            height;
+
+
+                        const ctx =
+                            canvas.getContext(
+                                "2d"
+                            );
+
+
+                        if (!ctx) {
+
+                            callback(null);
+
+                            return;
+
+                        }
+
+
+                        ctx.drawImage(
+                            img,
+                            0,
+                            0,
+                            width,
+                            height
+                        );
+
+
+                        const outputType =
+                            file.type ===
+                            "image/png"
+                                ? "image/png"
+                                : "image/jpeg";
+
+
+                        callback(
+                            canvas.toDataURL(
+                                outputType,
+                                0.88
+                            )
+                        );
+
+                    };
+
+
+                img.onerror =
+                    function () {
+
+                        callback(null);
+
+                    };
+
+
+                img.src =
+                    reader.result;
+
+            };
+
+
+        reader.onerror =
+            function () {
+
+                callback(null);
+
+            };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+
+
+    /* =========================================
+       INSERT PASTED IMAGE
+    ========================================= */
+
+    function insertPastedImage(
+        file,
+        editor,
+        errorDiv
+    ) {
+
+        if (
+            !file ||
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            errorDiv.textContent =
+                "Please choose an image file.";
+
+            return;
+
+        }
+
+
+        if (
+            file.size >
+            8 * 1024 * 1024
+        ) {
+
+            errorDiv.textContent =
+                "Image is too large. Please choose an image below 8 MB.";
+
+            return;
+
+        }
+
+
+        errorDiv.textContent =
+            "Preparing image...";
+
+
+        resizeImage(
+            file,
+            function (dataUrl) {
+
+                if (!dataUrl) {
+
+                    errorDiv.textContent =
+                        "Could not read that image.";
+
+                    return;
+
+                }
+
+
+                errorDiv.textContent =
+                    "";
+
+
+                insertHTMLAtCaret(
+
+                    `<img class="custom-question-image" src="${dataUrl}" alt="Question image" draggable="false"><br>`
+
+                );
+
+
+                editor.focus();
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       CLEAR EDITOR
+    ========================================= */
+
+    function clearEditor(editor) {
+
+        editor.innerHTML = "";
+
+        savedRange = null;
+
+        editor.focus();
+
+    }
+
+
+    /* =========================================
+       CUSTOM FORM ELEMENTS
+    ========================================= */
+
+    const form =
+        document.getElementById(
+            "customQuestionForm"
+        );
+
+
+    const editor =
+        document.getElementById(
+            "customQuestionText"
+        );
+
+
+    const marksInput =
+        document.getElementById(
+            "customMarks"
+        );
+
+
+    const pagesInput =
+        document.getElementById(
+            "customPages"
+        );
+
+
+    const wordInput =
+        document.getElementById(
+            "customWordLimit"
+        );
+
+
+    const errorDiv =
+        document.getElementById(
+            "customQuestionError"
+        );
+
+
+    const cancelButton =
+        document.getElementById(
+            "cancelCustomEdit"
+        );
+
+
+    /* =========================================
+       EDITOR SELECTION EVENTS
+    ========================================= */
+
+    [
+        "keyup",
+        "mouseup",
+        "focus",
+        "input"
+    ].forEach(
+        function (eventName) {
+
+            editor.addEventListener(
+                eventName,
+                saveEditorSelection
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       DIRECT IMAGE PASTE
+    ========================================= */
+
+    editor.addEventListener(
+        "paste",
+        function (event) {
+
+            const items =
+                event.clipboardData &&
+                event.clipboardData.items;
+
+
+            if (!items) return;
+
+
+            const imageItem =
+                [
+                    ...items
+                ].find(
+                    function (item) {
+
+                        return item.type.startsWith(
+                            "image/"
+                        );
+
+                    }
+                );
+
+
+            if (!imageItem) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            const text =
+                event.clipboardData.getData(
+                    "text/plain"
+                );
+
+
+            const file =
+                imageItem.getAsFile();
+
+
+            if (text) {
+
+                insertTextAtCaret(
+                    text
+                );
+
+                insertHTMLAtCaret(
+                    "<br>"
+                );
+
+            }
+
+
+            if (file) {
+
+                insertPastedImage(
+                    file,
+                    editor,
+                    errorDiv
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       CLEAR QUESTION
+    ========================================= */
+
+    document
+        .getElementById(
+            "clearQuestionButton"
+        )
+        .addEventListener(
+            "click",
+            function () {
+
+                clearEditor(
+                    editor
+                );
+
+                errorDiv.textContent =
+                    "";
+
+            }
+        );
+
+
+    /* =========================================
+       FORM SUBMIT
+    ========================================= */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const questionHTML =
+                sanitizeQuestionHTML(
+                    editor.innerHTML
+                );
+
+
+            const questionText =
+                plainTextFromHTML(
+                    questionHTML
+                );
+
+
+            const marks =
+                Number(
+                    marksInput.value
+                );
+
+
+            const pages =
+                Number(
+                    pagesInput.value
+                );
+
+
+            const wordLimit =
+                wordInput.value.trim() === ""
+                    ? null
+                    : Number(
+                        wordInput.value
+                    );
+
+
+            const errors = [];
+
+
+            if (
+                !questionText &&
+                !questionHTML.includes(
+                    "<img"
+                )
+            ) {
+
+                errors.push(
+                    "Please enter a question or add an image."
+                );
+
+            }
+
+
+            if (
+                !Number.isInteger(
+                    marks
+                ) ||
+                marks < 1 ||
+                marks > 1000
+            ) {
+
+                errors.push(
+                    "Marks must be a whole number between 1 and 1000."
+                );
+
+            }
+
+
+            if (
+                !Number.isInteger(
+                    pages
+                ) ||
+                pages < 1 ||
+                pages > 100
+            ) {
+
+                errors.push(
+                    "Answer pages must be a whole number between 1 and 100."
+                );
+
+            }
+
+
+            if (
+                wordLimit !== null &&
+                (
+                    !Number.isInteger(
+                        wordLimit
+                    ) ||
+                    wordLimit < 1 ||
+                    wordLimit > 10000
+                )
+            ) {
+
+                errors.push(
+                    "Word limit must be a whole number between 1 and 10000."
+                );
+
+            }
+
+
+            if (errors.length) {
+
+                errorDiv.textContent =
+                    errors.join(" ");
+
+                return;
+
+            }
+
+
+            const id =
+                editingId ||
+                `custom_${customIdCounter++}`;
+
+
+            const question = {
+
+                id,
+
+                question_id:
+                    `CUSTOM_${id.replace(
+                        /^custom_/,
+                        ""
+                    )}`,
+
+                question_text:
+                    questionText,
+
+                question_html:
+                    questionHTML,
+
+                marks,
+
+                pages
+
+            };
+
+
+            if (
+                wordLimit !== null
+            ) {
+
+                question.word_limit =
+                    wordLimit;
+
+            }
+
+
+            if (editingId) {
+
+                const index =
+                    customQuestions.findIndex(
+                        function (q) {
+
+                            return q.id ===
+                                editingId;
+
+                        }
+                    );
+
+
+                if (index !== -1) {
+
+                    customQuestions[index] =
+                        question;
+
+                }
+
+
+                editingId = null;
+
+
+            } else {
+
+                customQuestions.push(
+                    question
+                );
+
+            }
+
+
+            savedRange = null;
+
+
+            resetCustomForm();
+
+
+            renderCustomQuestionList();
+
+        }
+    );
+
+
+    /* =========================================
+       RESET CUSTOM FORM
+    ========================================= */
+
+    function resetCustomForm() {
+
+        editor.innerHTML = "";
+
+        marksInput.value = 10;
+
+        pagesInput.value = 2;
+
+        wordInput.value = "";
+
+        errorDiv.textContent = "";
+
+        editingId = null;
+
+        savedRange = null;
+
+        document
+            .getElementById(
+                "addCustomQuestion"
+            )
+            .textContent =
+            "+ Add Question";
+
+        cancelButton.style.display =
+            "none";
+
+    }
+
+
+    /* =========================================
+       CANCEL EDIT
+    ========================================= */
+
+    cancelButton.addEventListener(
+        "click",
+        function () {
+
+            resetCustomForm();
+
+        }
+    );
+
+
+    /* =========================================
+       RENDER CUSTOM QUESTIONS
+    ========================================= */
+
+    window.renderCustomQuestionList =
+        renderCustomQuestionList;
+
+
+    function renderCustomQuestionList() {
+
+        const items =
+            document.getElementById(
+                "customQuestionItems"
+            );
+
+
+        const count =
+            document.getElementById(
+                "customQuestionCount"
+            );
+
+
+        const totals =
+            document.getElementById(
+                "customTotals"
+            );
+
+
+        if (
+            !items ||
+            !count ||
+            !totals
+        ) {
+
+            return;
+
+        }
+
+
+        count.textContent =
+            `${customQuestions.length} question${customQuestions.length === 1 ? "" : "s"}`;
+
+
+        const totalMarks =
+            customQuestions.reduce(
+                function (sum, q) {
+
+                    return sum +
+                        Number(
+                            q.marks || 0
+                        );
+
+                },
+                0
+            );
+
+
+        const totalPages =
+            customQuestions.reduce(
+                function (sum, q) {
+
+                    return sum +
+                        Number(
+                            q.pages || 0
+                        );
+
+                },
+                0
+            );
+
+
+        totals.textContent =
+            customQuestions.length
+
+                ? `${totalMarks} Marks • ${totalPages} Answer Pages`
+
+                : "";
+
+
+        if (
+            !customQuestions.length
+        ) {
+
+            items.innerHTML =
+                '<div class="custom-empty-state">Add your first question above to build the QCAB.</div>';
+
+            return;
+
+        }
+
+
+        items.innerHTML = "";
+
+
+        customQuestions.forEach(
+            function (q, index) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "custom-question-card";
+
+
+                const number =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                number.className =
+                    "custom-question-number";
+
+
+                number.textContent =
+                    `Q${index + 1}`;
+
+
+                const content =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                content.className =
+                    "custom-question-content";
+
+
+                const preview =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                preview.className =
+                    "custom-question-preview";
+
+
+                preview.innerHTML =
+                    q.question_html ||
+                    escapeHTML(
+                        q.question_text
+                    );
+
+
+                preview
+                    .querySelectorAll(
+                        "img"
+                    )
+                    .forEach(
+                        function (img) {
+
+                            img.setAttribute(
+                                "alt",
+                                "Question image"
+                            );
+
+                        }
+                    );
+
+
+                content.appendChild(
+                    preview
+                );
+
+
+                const meta =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                meta.className =
+                    "custom-question-meta";
+
+
+                [
+
+                    `${q.marks} Marks`,
+
+                    `${q.pages} Page${q.pages === 1 ? "" : "s"}`,
+
+                    q.word_limit
+                        ? `${q.word_limit} Words`
+                        : null
+
+                ]
+                    .filter(Boolean)
+                    .forEach(
+                        function (label) {
+
+                            const span =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            span.textContent =
+                                label;
+
+
+                            meta.appendChild(
+                                span
+                            );
+
+                        }
+                    );
+
+
+                content.appendChild(
+                    meta
+                );
+
+
+                const actions =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                actions.className =
+                    "custom-question-actions";
+
+
+                function makeButton(
+                    label,
+                    className,
+                    handler,
+                    disabled,
+                    title
+                ) {
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.type =
+                        "button";
+
+
+                    button.className =
+                        `custom-small-button ${className || ""}`;
+
+
+                    button.textContent =
+                        label;
+
+
+                    button.disabled =
+                        disabled;
+
+
+                    button.title =
+                        title || "";
+
+
+                    button.addEventListener(
+                        "click",
+                        handler
+                    );
+
+
+                    return button;
+
+                }
+
+
+                actions.appendChild(
+
+                    makeButton(
+                        "↑",
+                        "",
+                        function () {
+
+                            if (
+                                index === 0
+                            ) return;
+
+
+                            [
+                                customQuestions[
+                                    index - 1
+                                ],
+
+                                customQuestions[
+                                    index
+                                ]
+
+                            ] = [
+
+                                customQuestions[
+                                    index
+                                ],
+
+                                customQuestions[
+                                    index - 1
+                                ]
+
+                            ];
+
+
+                            renderCustomQuestionList();
+
+                        },
+                        index === 0,
+                        "Move question up"
+                    )
+
+                );
+
+
+                actions.appendChild(
+
+                    makeButton(
+                        "↓",
+                        "",
+                        function () {
+
+                            if (
+                                index ===
+                                customQuestions.length - 1
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            [
+                                customQuestions[
+                                    index
+                                ],
+
+                                customQuestions[
+                                    index + 1
+                                ]
+
+                            ] = [
+
+                                customQuestions[
+                                    index + 1
+                                ],
+
+                                customQuestions[
+                                    index
+                                ]
+
+                            ];
+
+
+                            renderCustomQuestionList();
+
+                        },
+                        index ===
+                            customQuestions.length - 1,
+                        "Move question down"
+                    )
+
+                );
+
+
+                actions.appendChild(
+
+                    makeButton(
+                        "Edit",
+                        "",
+                        function () {
+
+                            editingId =
+                                q.id;
+
+
+                            editor.innerHTML =
+                                q.question_html ||
+                                escapeHTML(
+                                    q.question_text ||
+                                    ""
+                                );
+
+
+                            marksInput.value =
+                                q.marks;
+
+
+                            pagesInput.value =
+                                q.pages;
+
+
+                            wordInput.value =
+                                q.word_limit ||
+                                "";
+
+
+                            errorDiv.textContent =
+                                "";
+
+
+                            document
+                                .getElementById(
+                                    "addCustomQuestion"
+                                )
+                                .textContent =
+                                "Update Question";
+
+
+                            cancelButton.style.display =
+                                "inline-block";
+
+
+                            editor.focus();
+
+                        },
+                        false,
+                        "Edit question"
+                    )
+
+                );
+
+
+                actions.appendChild(
+
+                    makeButton(
+                        "Delete",
+                        "custom-delete-button",
+                        function () {
+
+                            customQuestions =
+                                customQuestions.filter(
+                                    function (item) {
+
+                                        return item.id !==
+                                            q.id;
+
+                                    }
+                                );
+
+
+                            if (
+                                editingId ===
+                                q.id
+                            ) {
+
+                                resetCustomForm();
+
+                            }
+
+
+                            renderCustomQuestionList();
+
+                        },
+                        false,
+                        "Delete question"
+                    )
+
+                );
+
+
+                card.append(
+                    number,
+                    content,
+                    actions
+                );
+
+
+                items.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    renderCustomQuestionList();
+
+})();
 
 </script>
 
